@@ -1,0 +1,6 @@
+@KAPMProjectManagement_HostAddress = http://localhost:5014
+
+GET {{KAPMProjectManagement_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

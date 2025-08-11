@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KAPMProjectManagementApi", "KAPMProjectManagementApi.csproj", "{D1ED554B-50D0-9A31-66F8-F349238876FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1ED554B-50D0-9A31-66F8-F349238876FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1ED554B-50D0-9A31-66F8-F349238876FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1ED554B-50D0-9A31-66F8-F349238876FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1ED554B-50D0-9A31-66F8-F349238876FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {82BC47CB-83D9-48E2-A365-03EEB3197CFF}
+	EndGlobalSection
+EndGlobal
