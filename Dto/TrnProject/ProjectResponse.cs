@@ -57,7 +57,7 @@ namespace KAPMProjectManagementApi.Dto.TrnProject
 
         // Navigation properties untuk response (opsional)
         [JsonProperty("unit_projects")]
-        public UnitProjectResponse? MstUnitProject { get; set; }
+        public UnitProjectSimpleResponse? MstUnitProject { get; set; }
         [JsonProperty("project_manager")]
         public ProjectManagerResponse? MstProjectManager { get; set; }
     }

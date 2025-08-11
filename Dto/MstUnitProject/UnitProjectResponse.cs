@@ -32,4 +32,13 @@ namespace KAPMProjectManagementApi.Dto.MstUnitProject
         [JsonProperty("projects")]
         public List<ProjectResponse> Projects { get; set; } = new List<ProjectResponse>();
     }
+
+    public class UnitProjectSimpleResponse
+    {
+        [JsonProperty("unit_project")]
+        public string UnitProject { get; set; } = default!;
+
+        [JsonProperty("unit_desc")]
+        public string UnitDesc { get; set; } = string.Empty;
+    }
 }

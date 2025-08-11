@@ -5,7 +5,5 @@ namespace KAPMProjectManagementApi.Dto.MstProjectManager
         public string Nipp { get; set; } = string.Empty;
 
         public string Name { get; set; } = default!;
-
-        public string Active { get; set; } = "Y";
     }
 }

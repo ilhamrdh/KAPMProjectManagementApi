@@ -21,7 +21,7 @@ namespace KAPMProjectManagementApi.Repositories
 
         public async Task<IEnumerable<TrnProject>> GetAllAsync()
         {
-            return await _context.TrnProject.ToListAsync();
+            return await _context.TrnProject.Include(x => x.MstUnitProject).Include(x => x.MstProjectManager).ToListAsync();
         }
 
         public async Task<TrnProject?> GetByCodeProjectAsync(string codeProject)

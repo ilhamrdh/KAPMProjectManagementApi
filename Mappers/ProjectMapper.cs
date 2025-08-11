@@ -13,8 +13,6 @@ namespace KAPMProjectManagementApi.Mappers
                 DescProject = model.DescProject,
                 NoSPMK = model.NoSPMK,
                 NoContract = model.NoContract,
-                UnitProject = model.UnitProject,
-                PMProject = model.PMProject,
                 PaymentMethod = model.PaymentMethod,
                 ContractValue = model.ContractValue,
                 Bank = model.Bank,
@@ -29,7 +27,7 @@ namespace KAPMProjectManagementApi.Mappers
                 ActualPersentage = model.ActualPersentage,
                 ProgressReport = model.ProgressReport,
                 Status = model.Status,
-                MstUnitProject = model.MstUnitProject.ToUnitProjectResponses(),
+                MstUnitProject = model.MstUnitProject.ToUnitProjectSimpleResponse(),
                 MstProjectManager = model.MstProjectManager.ToProjectManagerResponses()
             };
         }

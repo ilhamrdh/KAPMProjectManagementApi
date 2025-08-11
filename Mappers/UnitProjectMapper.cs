@@ -6,14 +6,14 @@ namespace KAPMProjectManagementApi.Mappers
 {
     public static class UnitProjectMapper
     {
-        // public static UnitProjectResponse ToUnitProjectResponses(this MstUnitProject model)
-        // {
-        //     return new UnitProjectResponse
-        //     {
-        //         UnitProject = model.UnitProject,
-        //         UnitDesc = model.UnitDesc,
-        //     };
-        // }
+        public static UnitProjectSimpleResponse ToUnitProjectSimpleResponse(this MstUnitProject model)
+        {
+            return new UnitProjectSimpleResponse
+            {
+                UnitProject = model.UnitProject,
+                UnitDesc = model.UnitDesc,
+            };
+        }
         public static UnitProjectResponse ToUnitProjectResponses(this MstUnitProject model)
         {
             return new UnitProjectResponse
