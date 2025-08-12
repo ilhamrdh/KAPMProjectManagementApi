@@ -16,8 +16,8 @@ namespace KAPMProjectManagementApi.Services
 
         public async Task<ProjectManagerResponse> CreateProjectManagerAsync(ProjectManagerReuqestDto reuqest)
         {
-            var exist = await _repository.GetByNippAsync(reuqest.Nipp);
-            if (exist != null)
+            var exist = await _repository.ExistsAsync(reuqest.Nipp);
+            if (!exist)
             {
                 throw new BadRequestException($"Data with NIPP {reuqest.Nipp} already exist.");
             }
@@ -45,8 +45,8 @@ namespace KAPMProjectManagementApi.Services
 
         public async Task<ProjectManagerResponse> UpdateProjectManagerAsync(ProjectManagerReuqestDto reuqest)
         {
-            var exist = await _repository.GetByNippAsync(reuqest.Nipp);
-            if (exist == null) throw new KeyNotFoundException($"Data with NIPP {reuqest.Nipp} not found.");
+            var exist = await _repository.ExistsAsync(reuqest.Nipp);
+            if (!exist) throw new KeyNotFoundException($"Data with NIPP {reuqest.Nipp} not found.");
 
             var pm = ProjectManagerMapper.ToProjectManagerFromRequest(reuqest);
             var updatePm = await _repository.UpdateAsync(pm);

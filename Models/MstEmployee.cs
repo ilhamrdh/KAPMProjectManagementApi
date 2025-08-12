@@ -15,6 +15,9 @@ namespace KAPMProjectManagementApi.Models
         [Column("nipp", TypeName = "varchar(15)")]
         public string Nipp { get; set; } = default!;
 
+        [Column("name", TypeName = "varchar(100)")]
+        public string Name { get; set; } = default!;
+
         [Column("grade", TypeName = "varchar(5)")]
         public string Grade { get; set; } = string.Empty;
 

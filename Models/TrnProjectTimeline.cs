@@ -21,7 +21,7 @@ namespace KAPMProjectManagementApi.Models
         public string CodeProject { get; set; } = default!;
 
         [Column("wbs_level", TypeName = "varchar(50)")]
-        public string WBSLevel { get; set; } = default!;
+        public int WBSLevel { get; set; } = default!;
 
         [Column("wbs_name", TypeName = "varchar(50)")]
         public string WBSName { get; set; } = string.Empty;

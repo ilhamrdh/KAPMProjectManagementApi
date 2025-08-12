@@ -177,11 +177,11 @@ namespace KAPMProjectManagementApi.Schema
                 .HasPrincipalKey(ps => ps.RoleId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<TrnProjectSO>()
-                .HasOne(e => e.MstEmployee)
-                .WithOne(ps => ps.TrnProjectSO)
-                .HasForeignKey<MstEmployee>(e => e.Nipp)
-                .HasPrincipalKey<TrnProjectSO>(ps => ps.Nipp)
+            modelBuilder.Entity<MstEmployee>()
+                .HasOne(e => e.TrnProjectSO)
+                .WithOne(ps => ps.MstEmployee)
+                .HasForeignKey<TrnProjectSO>(e => e.Nipp)
+                .HasPrincipalKey<MstEmployee>(ps => ps.Nipp)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<TrnProjectTimeline>()

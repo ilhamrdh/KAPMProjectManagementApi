@@ -19,9 +19,14 @@ namespace KAPMProjectManagementApi.Repositories
             return model;
         }
 
+        public async Task<bool> ExistsAsync(string codeProject)
+        {
+            return await _context.TrnProject.AsNoTracking().AnyAsync(x => x.CodeProject == codeProject);
+        }
+
         public async Task<IEnumerable<TrnProject>> GetAllAsync()
         {
-            return await _context.TrnProject.Include(x => x.MstUnitProject).Include(x => x.MstProjectManager).ToListAsync();
+            return await _context.TrnProject.AsNoTracking().Include(x => x.MstUnitProject).Include(x => x.MstProjectManager).ToListAsync();
         }
 
         public async Task<TrnProject?> GetByCodeProjectAsync(string codeProject)
@@ -31,9 +36,9 @@ namespace KAPMProjectManagementApi.Repositories
             return p;
         }
 
-        public async Task<TrnProject> UpdateAsync(TrnProject model, string codeProject)
+        public async Task<TrnProject> UpdateAsync(TrnProject model)
         {
-            var exist = await _context.TrnProject.FirstOrDefaultAsync(x => x.CodeProject.Equals(codeProject));
+            var exist = await _context.TrnProject.FirstOrDefaultAsync(x => x.CodeProject == model.CodeProject);
             if (exist == null) return null!;
 
             exist.AccountName = model.AccountName;
@@ -52,8 +57,8 @@ namespace KAPMProjectManagementApi.Repositories
             exist.FinishDate = model.FinishDate;
             exist.PlanPersentage = model.PlanPersentage;
             exist.PaymentMethod = model.PaymentMethod;
-            exist.PMProject = model.PMProject; // FK
-            exist.UnitProject = model.UnitProject; // FK
+            exist.PMProject = model.PMProject;
+            exist.UnitProject = model.UnitProject;
             exist.UserUpdate = model.UserUpdate;
             exist.DateUpdate = DateTime.Now;
 

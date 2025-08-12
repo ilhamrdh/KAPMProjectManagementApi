@@ -12,6 +12,10 @@ namespace KAPMProjectManagementApi.Models
         [Column("id")]
         public int Id { get; set; }
 
+        [Key]
+        [Column("adendum_no", TypeName = "varchar(50)")]
+        public string AdendumNo { get; set; } = default!;
+
         [ForeignKey("TrnProject")]
         [Column("code_project", TypeName = "varchar(50)")]
         public string CodeProject { get; set; } = default!;

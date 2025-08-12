@@ -20,6 +20,11 @@ namespace KAPMProjectManagementApi.Repositories
             return model;
         }
 
+        public async Task<bool> ExistsAsync(string nipp)
+        {
+            return await _context.MstProjectManager.AsNoTracking().AnyAsync(x => x.Nipp == nipp);
+        }
+
         public async Task<IEnumerable<MstProjectManager>> GetAllAsync()
         {
             return await _context.MstProjectManager.ToListAsync();

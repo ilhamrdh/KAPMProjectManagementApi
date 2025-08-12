@@ -23,18 +23,14 @@ namespace KAPMProjectManagementApi.Services
         }
         public async Task<ProjectResponse> CreateProjectAsync(ProjectRequestDto request)
         {
-            _logger.LogInformation($"➕ Create project with request {request}");
-            var exist = await _repository.GetByCodeProjectAsync(request.CodeProject);
-            if (exist != null)
-            {
-                throw new BadRequestException($"Data with Code Project {request.CodeProject} already exist.");
-            }
+            var exist = await _repository.ExistsAsync(request.CodeProject);
+            if (exist) throw new BadRequestException($"Data with Code Project {request.CodeProject} already exist.");
 
-            var unit = await _unitProjectRepository.GetByUnitProjectAsync(request.UnitProject);
-            if (unit == null) throw new KeyNotFoundException($"Data with Unit Project {request.UnitProject} not found.");
+            var unit = await _unitProjectRepository.ExistsAsync(request.UnitProject);
+            if (!unit) throw new KeyNotFoundException($"Data with Unit Project {request.UnitProject} not found.");
 
-            var pm = await _projectManagerRepository.GetByNippAsync(request.PMProject);
-            if (pm == null) throw new KeyNotFoundException($"Data with NIPP {request.PMProject} not found.");
+            var pm = await _projectManagerRepository.ExistsAsync(request.PMProject);
+            if (!pm) throw new KeyNotFoundException($"Data with NIPP {request.PMProject} not found.");
 
             var p = ProjectMapper.ToProjectFromRequest(request);
             var createP = await _repository.CreateAsync(p);
@@ -59,16 +55,16 @@ namespace KAPMProjectManagementApi.Services
             var exist = await _repository.GetByCodeProjectAsync(request.CodeProject);
             if (exist == null) throw new KeyNotFoundException($"Data with Code Project {request.CodeProject} not found.");
 
-            var unit = await _unitProjectRepository.GetByUnitProjectAsync(request.UnitProject);
-            if (unit == null) throw new KeyNotFoundException($"Data with Unit Project {request.UnitProject} not found.");
+            var unit = await _unitProjectRepository.ExistsAsync(request.UnitProject);
+            if (!unit) throw new KeyNotFoundException($"Data with Unit Project {request.UnitProject} not found.");
 
-            var pm = await _projectManagerRepository.GetByNippAsync(request.PMProject);
-            if (pm == null) throw new KeyNotFoundException($"Data with NIPP {request.PMProject} not found.");
+            var pm = await _projectManagerRepository.ExistsAsync(request.PMProject);
+            if (!pm) throw new KeyNotFoundException($"Data with NIPP {request.PMProject} not found.");
 
-            var p = ProjectMapper.ToProjectFromRequest(request);
-            var updateP = await _repository.UpdateAsync(p, exist.CodeProject);
+            var mapper = ProjectMapper.ToProjectFromRequest(request);
+            var update = await _repository.UpdateAsync(mapper);
 
-            return updateP.ToProjectResponses();
+            return update.ToProjectResponses();
         }
     }
 }

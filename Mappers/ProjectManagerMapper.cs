@@ -11,6 +11,7 @@ namespace KAPMProjectManagementApi.Mappers
             {
                 Nipp = model.Nipp,
                 Name = model.Name,
+                Active = model.Active
             };
         }
 

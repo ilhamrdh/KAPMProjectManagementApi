@@ -4,10 +4,10 @@ namespace KAPMProjectManagementApi.Interfaces.MasterUnitProject
 {
     public interface IMstUnitProjectService
     {
-        Task<IEnumerable<UnitProjectResponse>> GetAllUnitPtojectAsync();
+        Task<IEnumerable<UnitProjectSimpleResponse>> GetAllUnitPtojectAsync();
         Task<UnitProjectResponse?> GetUnitProjectByUnitCodeAsync(string unitCode);
-        Task<UnitProjectResponse> CreateUnitProjectAsync(UnitProjectRequestDto request);
-        Task<UnitProjectResponse> UpdateUnitProjectAsync(UnitProjectRequestDto request);
+        Task<UnitProjectSimpleResponse> CreateUnitProjectAsync(UnitProjectRequestDto request);
+        Task<UnitProjectSimpleResponse> UpdateUnitProjectAsync(UnitProjectRequestDto request);
 
     }
 }

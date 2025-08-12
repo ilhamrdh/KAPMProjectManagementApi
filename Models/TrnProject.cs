@@ -22,6 +22,9 @@ namespace KAPMProjectManagementApi.Models
         [Column("no_spmk", TypeName = "varchar(50)")]
         public string NoSPMK { get; set; } = string.Empty;
 
+        [Column("project_owner", TypeName = "varchar(50)")]
+        public string ProjectOwner { get; set; } = default!;
+
         [Column("no_contract", TypeName = "varchar(50)")]
         public string NoContract { get; set; } = string.Empty;
 

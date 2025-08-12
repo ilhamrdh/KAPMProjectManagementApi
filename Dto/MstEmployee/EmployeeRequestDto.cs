@@ -14,6 +14,10 @@ namespace KAPMProjectManagementApi.Dto.MstEmployee
         [JsonProperty("grade")]
         public string Grade { get; set; } = string.Empty;
 
+        [StringLength(100, ErrorMessage = "Name must be at most 100 characters long")]
+        [JsonProperty("name")]
+        public string Name { get; set; } = string.Empty;
+
         [StringLength(50, ErrorMessage = "Name must be at most 50 characters long")]
         [JsonProperty("plans")]
         public string Plans { get; set; } = string.Empty;

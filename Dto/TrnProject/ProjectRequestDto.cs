@@ -24,6 +24,10 @@ namespace KAPMProjectManagementApi.Dto.TrnProject
         [JsonProperty("no_contract")]
         public string NoContract { get; set; } = string.Empty;
 
+        [StringLength(50, ErrorMessage = "Project Owner cannot exceed 50 characters")]
+        [JsonProperty("project_owner")]
+        public string ProjectOwner { get; set; } = default!;
+
         [Required(ErrorMessage = "Unit Project is required")]
         [StringLength(50, ErrorMessage = "Unit Project cannot exceed 50 characters")]
         [JsonProperty("unit_project")]

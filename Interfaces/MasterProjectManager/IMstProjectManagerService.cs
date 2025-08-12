@@ -4,7 +4,6 @@ namespace KAPMProjectManagementApi.Interfaces.MasterProjectManager
 {
     public interface IMstProjectManagerService
     {
-
         Task<IEnumerable<ProjectManagerResponse>> GetAllProjectManagerAsync();
         Task<ProjectManagerResponse?> GetProjectManagerByNippAsync(string nipp);
         Task<ProjectManagerResponse> CreateProjectManagerAsync(ProjectManagerReuqestDto reuqest);

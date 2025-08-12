@@ -22,17 +22,20 @@ namespace KAPMProjectManagementApi.Repositories
             return model;
         }
 
+        public async Task<bool> ExistsAsync(string unitCode)
+        {
+            return await _context.MstUnitProject.AsNoTracking().AnyAsync(x => x.UnitProject == unitCode);
+        }
+
         public async Task<IEnumerable<MstUnitProject>> GetAllAsync()
         {
             var result = await _context.MstUnitProject.ToListAsync();
-            //     _logger.LogInformation("Get All Unit Project Result: {Result}",
-            // System.Text.Json.JsonSerializer.Serialize(result));
             return result;
         }
 
         public async Task<MstUnitProject?> GetByUnitProjectAsync(string unitProject)
         {
-            var up = await _context.MstUnitProject.Include(x => x.TrnProjects).FirstOrDefaultAsync(x => x.UnitProject == unitProject);
+            var up = await _context.MstUnitProject.Include(x => x.TrnProjects.Where(p => p.Active == "Y")).FirstOrDefaultAsync(x => x.UnitProject == unitProject);
             if (up == null) return null;
             return up;
         }

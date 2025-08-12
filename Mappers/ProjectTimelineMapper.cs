@@ -13,12 +13,22 @@ namespace KAPMProjectManagementApi.Mappers
                 WBSName = model.WBSName,
                 WBSLevel = model.WBSLevel,
                 Responsible = model.Responsible,
-                Status = model.Status,
+                Active = model.Active,
+                Status = model.Status.ToString(),
                 StartDate = model.StartDate,
                 FinishDate = model.FinishDate,
-                CodeProject = model.CodeProject,
                 TrnProject = model.TrnProject?.ToProjectResponses(),
 
+            };
+        }
+
+        public static ProjectTimelineSimpleResponse ToProjectTimelineSimpleResponse(this TrnProjectTimeline model)
+        {
+            return new ProjectTimelineSimpleResponse
+            {
+                WBSNo = model.WBSNo,
+                WBSName = model.WBSName,
+                WBSLevel = model.WBSLevel,
             };
         }
 

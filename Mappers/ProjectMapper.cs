@@ -16,8 +16,10 @@ namespace KAPMProjectManagementApi.Mappers
                 PaymentMethod = model.PaymentMethod,
                 ContractValue = model.ContractValue,
                 Bank = model.Bank,
+                ProjectOwner = model.ProjectOwner,
                 AccountNumber = model.AccountNumber,
                 AccountName = model.AccountName,
+                Active = model.Active,
                 WorkingMethod = model.WorkingMethod,
                 PPH = model.PPH,
                 StartDateSPMK = model.StartDateSPMK,
@@ -26,9 +28,18 @@ namespace KAPMProjectManagementApi.Mappers
                 PlanPersentage = model.PlanPersentage,
                 ActualPersentage = model.ActualPersentage,
                 ProgressReport = model.ProgressReport,
-                Status = model.Status,
+                Status = model.Status.ToString(),
                 MstUnitProject = model.MstUnitProject.ToUnitProjectSimpleResponse(),
                 MstProjectManager = model.MstProjectManager.ToProjectManagerResponses()
+            };
+        }
+
+        public static ProjectSimpleResponse ToProjectSimpleResponses(this TrnProject model)
+        {
+            return new ProjectSimpleResponse
+            {
+                CodeProject = model.CodeProject,
+                DescProject = model.DescProject,
             };
         }
 
@@ -39,6 +50,7 @@ namespace KAPMProjectManagementApi.Mappers
                 CodeProject = request.CodeProject,
                 DescProject = request.DescProject,
                 NoSPMK = request.NoSPMK,
+                ProjectOwner = request.ProjectOwner,
                 NoContract = request.NoContract,
                 UnitProject = request.UnitProject,
                 PMProject = request.PMProject,
@@ -49,6 +61,7 @@ namespace KAPMProjectManagementApi.Mappers
                 AccountName = request.AccountName,
                 WorkingMethod = request.WorkingMethod,
                 PPH = request.PPH,
+                Active = request.Active,
                 StartDateSPMK = request.StartDateSPMK,
                 StartDate = request.StartDate,
                 FinishDate = request.FinishDate,

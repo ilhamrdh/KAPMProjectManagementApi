@@ -19,7 +19,7 @@ namespace KAPMProjectManagementApi.Controllers
         public async Task<IActionResult> Create([FromBody] UnitProjectRequestDto request)
         {
             var result = await _service.CreateUnitProjectAsync(request);
-            WebResponse<UnitProjectResponse> response = new WebResponse<UnitProjectResponse>
+            WebResponse<UnitProjectSimpleResponse> response = new WebResponse<UnitProjectSimpleResponse>
             {
                 StatusCode = 201,
                 Message = "Success Create Unit Project",
@@ -32,7 +32,7 @@ namespace KAPMProjectManagementApi.Controllers
         public async Task<IActionResult> GetAll()
         {
             var result = await _service.GetAllUnitPtojectAsync();
-            WebResponse<IEnumerable<UnitProjectResponse>> response = new WebResponse<IEnumerable<UnitProjectResponse>>
+            WebResponse<IEnumerable<UnitProjectSimpleResponse>> response = new WebResponse<IEnumerable<UnitProjectSimpleResponse>>
             {
                 StatusCode = 200,
                 Message = "Success Get All Unit Project",
@@ -58,7 +58,7 @@ namespace KAPMProjectManagementApi.Controllers
         public async Task<IActionResult> Update([FromBody] UnitProjectRequestDto request)
         {
             var result = await _service.UpdateUnitProjectAsync(request);
-            WebResponse<UnitProjectResponse> response = new WebResponse<UnitProjectResponse>
+            WebResponse<UnitProjectSimpleResponse> response = new WebResponse<UnitProjectSimpleResponse>
             {
                 StatusCode = 200,
                 Message = "Success Update Unit Project",

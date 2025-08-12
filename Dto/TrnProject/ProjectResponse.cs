@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using KAPMProjectManagementApi.Dto.MstProjectManager;
 using KAPMProjectManagementApi.Dto.MstUnitProject;
 using KAPMProjectManagementApi.Emun;
@@ -19,11 +20,9 @@ namespace KAPMProjectManagementApi.Dto.TrnProject
         [JsonProperty("no_contract")]
         public string NoContract { get; set; } = string.Empty;
 
-        [JsonProperty("unit_project")]
-        public string UnitProject { get; set; } = default!;
+        [JsonProperty("project_owner")]
+        public string ProjectOwner { get; set; } = default!;
 
-        [JsonProperty("pm_project")]
-        public string PMProject { get; set; } = default!;
         [JsonProperty("payment_method")]
         public string PaymentMethod { get; set; } = default!;
         [JsonProperty("contract_value")]
@@ -50,9 +49,12 @@ namespace KAPMProjectManagementApi.Dto.TrnProject
         public double ActualPersentage { get; set; }
         [JsonProperty("progress_report")]
         public string ProgressReport { get; set; } = string.Empty;
+
         [JsonProperty("status")]
-        public EProjectStatus Status { get; set; }
-        [JsonProperty("status_desc")]
+        // [EnumDataType(typeof(string))]
+        public string Status { get; set; } = default!;
+
+        [JsonProperty("active")]
         public string Active { get; set; } = "Y";
 
         // Navigation properties untuk response (opsional)
@@ -60,5 +62,14 @@ namespace KAPMProjectManagementApi.Dto.TrnProject
         public UnitProjectSimpleResponse? MstUnitProject { get; set; }
         [JsonProperty("project_manager")]
         public ProjectManagerResponse? MstProjectManager { get; set; }
+    }
+
+    public class ProjectSimpleResponse
+    {
+        [JsonProperty("code_project")]
+        public string CodeProject { get; set; } = default!;
+
+        [JsonProperty("desc_project")]
+        public string DescProject { get; set; } = default!;
     }
 }

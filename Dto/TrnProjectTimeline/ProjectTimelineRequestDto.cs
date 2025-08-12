@@ -19,7 +19,7 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectTimeline
         [Required(ErrorMessage = "WBS Level is required")]
         [StringLength(50, ErrorMessage = "WBS Level cannot be longer than 50 characters")]
         [JsonProperty("wbs_level")]
-        public string WBSLevel { get; set; } = default!;
+        public int WBSLevel { get; set; } = default!;
 
         [StringLength(50, ErrorMessage = "WBS Name cannot be longer than 50 characters")]
         [JsonProperty("wbs_name")]
@@ -30,7 +30,7 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectTimeline
         public string Responsible { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Status is required")]
-        [EnumDataType(typeof(EProjectStatus), ErrorMessage = "Status must be one of: Waiting, On Progress, Done")]
+        [EnumDataType(typeof(EProjectTimeline), ErrorMessage = "Status must be one of: Waiting, On Progress, Done")]
         public EProjectTimeline Status { get; set; }
 
         [StringLength(1, ErrorMessage = "Active must be 1 character")]
