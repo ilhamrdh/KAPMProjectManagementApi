@@ -50,10 +50,10 @@ namespace KAPMProjectManagementApi.Repositories
 
             exist.ActionPlan = model.ActionPlan;
             exist.ActionProblem = model.ActionProblem;
-            exist.CodeProject = model.CodeProject;
+            exist.ProjectDef = model.ProjectDef;
             exist.Problem = model.Problem;
             exist.NoSr = model.NoSr;
-            exist.WBSNo = model.WBSNo;
+            exist.WBSElement = model.WBSElement;
             exist.WeekNo = model.WeekNo;
             exist.DateUpdate = DateTime.UtcNow;
             exist.UserUpdate = model.UserUpdate;

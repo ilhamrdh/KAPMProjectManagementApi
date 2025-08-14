@@ -3,36 +3,49 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KAPMProjectManagementApi.Models
 {
-    [Table("trn_project_so")]
-    public class TrnProjectSO
+    [Table("trn_sap_hrd")]
+    public class TrnSapHrd
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
         public int Id { get; set; }
 
-        [ForeignKey("TrnProject")]
+        [Key]
         [Column("project_def", TypeName = "varchar(50)")]
         public string ProjectDef { get; set; } = string.Empty;
 
-        [ForeignKey("MstRoleProject")]
-        [Column("role_id", TypeName = "varchar(50)")]
-        public string RoleId { get; set; } = default!; // FK master Role Project
+        [Column("project_desc", TypeName = "varchar(50)")]
+        public string ProjectDesc { get; set; } = string.Empty;
 
-        [ForeignKey("MstEmployee")]
-        [Column("nipp", TypeName = "varchar(15)")]
-        public string Nipp { get; set; } = default!; // FK master Employee
+        [ForeignKey("MstUnitProject")]
+        [Column("project_profile", TypeName = "varchar(50)")]
+        public string ProjectProfile { get; set; } = string.Empty; // FK Unit Project
 
-        [Column("name", TypeName = "varchar(100)")]
-        public string Name { get; set; } = default!;
+        [ForeignKey("MstProjectManager")]
+        [Column("project_responsible", TypeName = "varchar(50)")]
+        public string ProjectResponsible { get; set; } = string.Empty; // FK PM
+
+        [Column("project_owner", TypeName = "varchar(50)")]
+        public string ProjectOwner { get; set; } = string.Empty;
+
+        [Column("project_location", TypeName = "varchar(50)")]
+        public string ProjectLocation { get; set; } = string.Empty;
 
         [Column("start_date")]
         [DataType(DataType.DateTime)]
         public DateTime StartDate { get; set; }
 
-        [Column("finish_date")]
+        [Column("end_date")]
         [DataType(DataType.DateTime)]
-        public DateTime FinishDate { get; set; }
+        public DateTime EndDate { get; set; }
+
+        [Column("fiscal_year")]
+        [DataType(DataType.DateTime)]
+        public DateTime FiscalYear { get; set; }
+
+        [Column("status_system", TypeName = "varchar(50)")]
+        public string StatusSystem { get; set; } = string.Empty;
 
         [Column("active", TypeName = "varchar(1)")]
         public string Active { get; set; } = "Y";
@@ -50,13 +63,5 @@ namespace KAPMProjectManagementApi.Models
         [Column("date_update")]
         [DataType(DataType.DateTime)]
         public DateTime DateUpdate { get; set; }
-
-        public virtual MstRoleProject MstRoleProject { get; set; } = default!;
-
-        public virtual MstEmployee MstEmployee { get; set; } = default!;
-
-        public virtual TrnProject TrnProject { get; set; } = default!;
-
     }
-
 }

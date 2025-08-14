@@ -15,8 +15,8 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectAdendum
         [JsonProperty("type_adendum")]
         public string TypeAdendum { get; set; } = string.Empty;
 
-        [JsonProperty("wbs_no")]
-        public string WBSNo { get; set; } = default!;
+        [JsonProperty("wbs_element")]
+        public string WBSElement { get; set; } = default!;
 
         [JsonProperty("cost_before")]
         public double CostBefore { get; set; }

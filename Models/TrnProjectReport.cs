@@ -14,11 +14,11 @@ namespace KAPMProjectManagementApi.Models
 
         [Key]
         [Column("week_no")]
-        public string WeekNo { get; set; } = default!;
+        public string WeekNo { get; set; } = string.Empty;
 
         [ForeignKey("TrnProject")]
-        [Column("code_project", TypeName = "varchar(50)")]
-        public string CodeProject { get; set; } = default!; // FK to trn_project
+        [Column("project_def", TypeName = "varchar(50)")]
+        public string ProjectDef { get; set; } = string.Empty; // FK to trn_project
 
         [Column("date_report")]
         public DateTime DateReport { get; set; }
@@ -49,7 +49,7 @@ namespace KAPMProjectManagementApi.Models
         [DataType(DataType.DateTime)]
         public DateTime DateUpdate { get; set; }
 
-        public virtual TrnProject TrnProject { get; set; } = default!;
+        public virtual TrnProject TrnProject { get; set; } = new TrnProject();
 
         public virtual ICollection<TrnProjectIssue> TrnProjectIssues { get; set; } = new List<TrnProjectIssue>();
 

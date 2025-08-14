@@ -103,13 +103,18 @@ namespace KAPMProjectManagementApi.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    code_project = table.Column<string>(type: "varchar(50)", nullable: false),
-                    desc_project = table.Column<string>(type: "varchar(50)", nullable: false),
-                    no_spmk = table.Column<string>(type: "varchar(50)", nullable: false),
+                    project_def = table.Column<string>(type: "varchar(50)", nullable: false),
+                    project_desc = table.Column<string>(type: "varchar(50)", nullable: false),
+                    project_profile = table.Column<string>(type: "varchar(50)", nullable: false),
+                    project_responsible = table.Column<string>(type: "varchar(50)", nullable: false),
                     project_owner = table.Column<string>(type: "varchar(50)", nullable: false),
+                    project_location = table.Column<string>(type: "varchar(50)", nullable: false),
+                    start_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    end_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    fiscal_year = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    no_spmk = table.Column<string>(type: "varchar(50)", nullable: false),
                     no_contract = table.Column<string>(type: "varchar(50)", nullable: false),
-                    unit_project = table.Column<string>(type: "varchar(50)", nullable: false),
-                    pm_project = table.Column<string>(type: "varchar(50)", nullable: false),
+                    start_date_spmk = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     payment_method = table.Column<string>(type: "varchar(50)", nullable: false),
                     contract_value = table.Column<string>(type: "varchar(50)", nullable: false),
                     bank = table.Column<string>(type: "varchar(10)", nullable: false),
@@ -117,12 +122,10 @@ namespace KAPMProjectManagementApi.Migrations
                     account_name = table.Column<string>(type: "varchar(50)", nullable: false),
                     working_method = table.Column<string>(type: "varchar(50)", nullable: false),
                     pph = table.Column<string>(type: "varchar(50)", nullable: false),
-                    start_date_spmk = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    start_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    finish_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     plan_persentage = table.Column<double>(type: "numeric(18,2)", nullable: false),
                     actual_persentage = table.Column<double>(type: "numeric(18,2)", nullable: false),
                     progress_report = table.Column<string>(type: "varchar(100)", nullable: false),
+                    company_code = table.Column<string>(type: "varchar(50)", nullable: false),
                     status = table.Column<string>(type: "varchar(20)", nullable: false),
                     active = table.Column<string>(type: "varchar(1)", nullable: false),
                     user_add = table.Column<string>(type: "varchar(50)", nullable: false),
@@ -132,17 +135,17 @@ namespace KAPMProjectManagementApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_trn_project", x => new { x.id, x.code_project });
-                    table.UniqueConstraint("AK_trn_project_code_project", x => x.code_project);
+                    table.PrimaryKey("PK_trn_project", x => new { x.id, x.project_def });
+                    table.UniqueConstraint("AK_trn_project_project_def", x => x.project_def);
                     table.ForeignKey(
-                        name: "FK_trn_project_mst_project_manager_pm_project",
-                        column: x => x.pm_project,
+                        name: "FK_trn_project_mst_project_manager_project_responsible",
+                        column: x => x.project_responsible,
                         principalTable: "mst_project_manager",
                         principalColumn: "nipp",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_trn_project_mst_unit_project_unit_project",
-                        column: x => x.unit_project,
+                        name: "FK_trn_project_mst_unit_project_project_profile",
+                        column: x => x.project_profile,
                         principalTable: "mst_unit_project",
                         principalColumn: "unit_project",
                         onDelete: ReferentialAction.Restrict);
@@ -155,7 +158,7 @@ namespace KAPMProjectManagementApi.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     week_no = table.Column<string>(type: "text", nullable: false),
-                    code_project = table.Column<string>(type: "varchar(50)", nullable: false),
+                    project_def = table.Column<string>(type: "varchar(50)", nullable: false),
                     date_report = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     plan_persentage = table.Column<double>(type: "double precision", nullable: false),
                     actual_persentage = table.Column<double>(type: "double precision", nullable: false),
@@ -171,10 +174,10 @@ namespace KAPMProjectManagementApi.Migrations
                     table.PrimaryKey("PK_trn_project_report", x => new { x.id, x.week_no });
                     table.UniqueConstraint("AK_trn_project_report_week_no", x => x.week_no);
                     table.ForeignKey(
-                        name: "FK_trn_project_report_trn_project_code_project",
-                        column: x => x.code_project,
+                        name: "FK_trn_project_report_trn_project_project_def",
+                        column: x => x.project_def,
                         principalTable: "trn_project",
-                        principalColumn: "code_project",
+                        principalColumn: "project_def",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -184,7 +187,7 @@ namespace KAPMProjectManagementApi.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    code_project = table.Column<string>(type: "varchar(50)", nullable: false),
+                    project_def = table.Column<string>(type: "varchar(50)", nullable: false),
                     role_id = table.Column<string>(type: "varchar(50)", nullable: false),
                     nipp = table.Column<string>(type: "varchar(15)", nullable: false),
                     name = table.Column<string>(type: "varchar(100)", nullable: false),
@@ -212,10 +215,10 @@ namespace KAPMProjectManagementApi.Migrations
                         principalColumn: "role_id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_trn_project_so_trn_project_code_project",
-                        column: x => x.code_project,
+                        name: "FK_trn_project_so_trn_project_project_def",
+                        column: x => x.project_def,
                         principalTable: "trn_project",
-                        principalColumn: "code_project",
+                        principalColumn: "project_def",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -225,15 +228,15 @@ namespace KAPMProjectManagementApi.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    wbs_no = table.Column<string>(type: "varchar(50)", nullable: false),
-                    code_project = table.Column<string>(type: "varchar(50)", nullable: false),
+                    wbs_element = table.Column<string>(type: "varchar(50)", nullable: false),
                     wbs_level = table.Column<string>(type: "varchar(50)", nullable: false),
-                    wbs_name = table.Column<string>(type: "varchar(50)", nullable: false),
+                    wbs_desc = table.Column<string>(type: "varchar(50)", nullable: false),
+                    project_def = table.Column<string>(type: "varchar(50)", nullable: false),
                     responsible = table.Column<string>(type: "varchar(100)", nullable: false),
                     status = table.Column<string>(type: "varchar(20)", nullable: false),
                     active = table.Column<string>(type: "varchar(1)", nullable: false),
                     start_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    finish_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    end_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     user_add = table.Column<string>(type: "varchar(50)", nullable: false),
                     date_add = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     user_update = table.Column<string>(type: "varchar(50)", nullable: false),
@@ -241,13 +244,13 @@ namespace KAPMProjectManagementApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_trn_project_timeline", x => new { x.id, x.wbs_no });
-                    table.UniqueConstraint("AK_trn_project_timeline_wbs_no", x => x.wbs_no);
+                    table.PrimaryKey("PK_trn_project_timeline", x => new { x.id, x.wbs_element });
+                    table.UniqueConstraint("AK_trn_project_timeline_wbs_element", x => x.wbs_element);
                     table.ForeignKey(
-                        name: "FK_trn_project_timeline_trn_project_code_project",
-                        column: x => x.code_project,
+                        name: "FK_trn_project_timeline_trn_project_project_def",
+                        column: x => x.project_def,
                         principalTable: "trn_project",
-                        principalColumn: "code_project",
+                        principalColumn: "project_def",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -258,7 +261,7 @@ namespace KAPMProjectManagementApi.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     no = table.Column<string>(type: "varchar(50)", nullable: false),
-                    code_project = table.Column<string>(type: "varchar(50)", nullable: false),
+                    project_def = table.Column<string>(type: "varchar(50)", nullable: false),
                     type = table.Column<string>(type: "varchar(20)", nullable: false),
                     progress_report = table.Column<string>(type: "varchar(100)", nullable: false),
                     date_plan = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -269,19 +272,17 @@ namespace KAPMProjectManagementApi.Migrations
                     user_add = table.Column<string>(type: "varchar(50)", nullable: false),
                     date_add = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     user_update = table.Column<string>(type: "varchar(50)", nullable: false),
-                    date_update = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    TrnProjectId = table.Column<int>(type: "integer", nullable: false),
-                    TrnProjectCodeProject = table.Column<string>(type: "varchar(50)", nullable: false)
+                    date_update = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_trn_schedule_invoice", x => new { x.id, x.no });
                     table.ForeignKey(
-                        name: "FK_trn_schedule_invoice_trn_project_TrnProjectId_TrnProjectCod~",
-                        columns: x => new { x.TrnProjectId, x.TrnProjectCodeProject },
+                        name: "FK_trn_schedule_invoice_trn_project_project_def",
+                        column: x => x.project_def,
                         principalTable: "trn_project",
-                        principalColumns: new[] { "id", "code_project" },
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "project_def",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -291,9 +292,9 @@ namespace KAPMProjectManagementApi.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     adendum_no = table.Column<string>(type: "varchar(50)", nullable: true),
-                    code_project = table.Column<string>(type: "varchar(50)", nullable: false),
                     type_adendum = table.Column<string>(type: "varchar(50)", nullable: false),
-                    wbs_no = table.Column<string>(type: "varchar(50)", nullable: false),
+                    project_def = table.Column<string>(type: "varchar(50)", nullable: false),
+                    wbs_element = table.Column<string>(type: "varchar(50)", nullable: false),
                     cost_before = table.Column<double>(type: "numeric(18,2)", nullable: false),
                     cost_after = table.Column<double>(type: "numeric(18,2)", nullable: false),
                     date_before = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -310,16 +311,16 @@ namespace KAPMProjectManagementApi.Migrations
                 {
                     table.PrimaryKey("PK_trn_project_adendum", x => x.id);
                     table.ForeignKey(
-                        name: "FK_trn_project_adendum_trn_project_code_project",
-                        column: x => x.code_project,
+                        name: "FK_trn_project_adendum_trn_project_project_def",
+                        column: x => x.project_def,
                         principalTable: "trn_project",
-                        principalColumn: "code_project",
+                        principalColumn: "project_def",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_trn_project_adendum_trn_project_timeline_wbs_no",
-                        column: x => x.wbs_no,
+                        name: "FK_trn_project_adendum_trn_project_timeline_wbs_element",
+                        column: x => x.wbs_element,
                         principalTable: "trn_project_timeline",
-                        principalColumn: "wbs_no",
+                        principalColumn: "wbs_element",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -331,10 +332,12 @@ namespace KAPMProjectManagementApi.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     no_sr = table.Column<string>(type: "text", nullable: false),
                     week_no = table.Column<string>(type: "text", nullable: false),
-                    code_project = table.Column<string>(type: "varchar(50)", nullable: false),
-                    wbs_no = table.Column<string>(type: "varchar(50)", nullable: false),
+                    project_def = table.Column<string>(type: "varchar(50)", nullable: false),
+                    wbs_element = table.Column<string>(type: "varchar(50)", nullable: false),
                     plan_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     actual_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    plan_persentage = table.Column<double>(type: "double precision", nullable: false),
+                    actual_persentage = table.Column<double>(type: "double precision", nullable: false),
                     status = table.Column<string>(type: "varchar(20)", nullable: false),
                     active = table.Column<string>(type: "varchar(1)", nullable: false),
                     user_add = table.Column<string>(type: "varchar(50)", nullable: false),
@@ -347,10 +350,10 @@ namespace KAPMProjectManagementApi.Migrations
                     table.PrimaryKey("PK_trn_project_report_dtl", x => new { x.id, x.no_sr });
                     table.UniqueConstraint("AK_trn_project_report_dtl_no_sr", x => x.no_sr);
                     table.ForeignKey(
-                        name: "FK_trn_project_report_dtl_trn_project_code_project",
-                        column: x => x.code_project,
+                        name: "FK_trn_project_report_dtl_trn_project_project_def",
+                        column: x => x.project_def,
                         principalTable: "trn_project",
-                        principalColumn: "code_project",
+                        principalColumn: "project_def",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_trn_project_report_dtl_trn_project_report_week_no",
@@ -359,10 +362,10 @@ namespace KAPMProjectManagementApi.Migrations
                         principalColumn: "week_no",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_trn_project_report_dtl_trn_project_timeline_wbs_no",
-                        column: x => x.wbs_no,
+                        name: "FK_trn_project_report_dtl_trn_project_timeline_wbs_element",
+                        column: x => x.wbs_element,
                         principalTable: "trn_project_timeline",
-                        principalColumn: "wbs_no",
+                        principalColumn: "wbs_element",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -373,10 +376,10 @@ namespace KAPMProjectManagementApi.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     no_issue = table.Column<string>(type: "text", nullable: false),
-                    code_project = table.Column<string>(type: "varchar(50)", nullable: false),
+                    project_def = table.Column<string>(type: "varchar(50)", nullable: false),
                     week_no = table.Column<string>(type: "varchar(50)", nullable: false),
                     no_sr = table.Column<string>(type: "varchar(50)", nullable: false),
-                    wbs_no = table.Column<string>(type: "varchar(50)", nullable: false),
+                    wbs_element = table.Column<string>(type: "varchar(50)", nullable: false),
                     problem = table.Column<string>(type: "varchar(255)", nullable: false),
                     action_plan = table.Column<string>(type: "varchar(255)", nullable: false),
                     action_problem = table.Column<string>(type: "varchar(255)", nullable: false),
@@ -391,10 +394,10 @@ namespace KAPMProjectManagementApi.Migrations
                 {
                     table.PrimaryKey("PK_trn_project_issue", x => new { x.id, x.no_issue });
                     table.ForeignKey(
-                        name: "FK_trn_project_issue_trn_project_code_project",
-                        column: x => x.code_project,
+                        name: "FK_trn_project_issue_trn_project_project_def",
+                        column: x => x.project_def,
                         principalTable: "trn_project",
-                        principalColumn: "code_project",
+                        principalColumn: "project_def",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_trn_project_issue_trn_project_report_dtl_no_sr",
@@ -411,30 +414,25 @@ namespace KAPMProjectManagementApi.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_trn_project_pm_project",
+                name: "IX_trn_project_project_profile",
                 table: "trn_project",
-                column: "pm_project",
+                column: "project_profile");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_trn_project_project_responsible",
+                table: "trn_project",
+                column: "project_responsible",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_trn_project_unit_project",
-                table: "trn_project",
-                column: "unit_project");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_trn_project_adendum_code_project",
+                name: "IX_trn_project_adendum_project_def",
                 table: "trn_project_adendum",
-                column: "code_project");
+                column: "project_def");
 
             migrationBuilder.CreateIndex(
-                name: "IX_trn_project_adendum_wbs_no",
+                name: "IX_trn_project_adendum_wbs_element",
                 table: "trn_project_adendum",
-                column: "wbs_no");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_trn_project_issue_code_project",
-                table: "trn_project_issue",
-                column: "code_project");
+                column: "wbs_element");
 
             migrationBuilder.CreateIndex(
                 name: "IX_trn_project_issue_no_sr",
@@ -442,34 +440,34 @@ namespace KAPMProjectManagementApi.Migrations
                 column: "no_sr");
 
             migrationBuilder.CreateIndex(
+                name: "IX_trn_project_issue_project_def",
+                table: "trn_project_issue",
+                column: "project_def");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_trn_project_issue_week_no",
                 table: "trn_project_issue",
                 column: "week_no");
 
             migrationBuilder.CreateIndex(
-                name: "IX_trn_project_report_code_project",
+                name: "IX_trn_project_report_project_def",
                 table: "trn_project_report",
-                column: "code_project");
+                column: "project_def");
 
             migrationBuilder.CreateIndex(
-                name: "IX_trn_project_report_dtl_code_project",
+                name: "IX_trn_project_report_dtl_project_def",
                 table: "trn_project_report_dtl",
-                column: "code_project");
+                column: "project_def");
 
             migrationBuilder.CreateIndex(
-                name: "IX_trn_project_report_dtl_wbs_no",
+                name: "IX_trn_project_report_dtl_wbs_element",
                 table: "trn_project_report_dtl",
-                column: "wbs_no");
+                column: "wbs_element");
 
             migrationBuilder.CreateIndex(
                 name: "IX_trn_project_report_dtl_week_no",
                 table: "trn_project_report_dtl",
                 column: "week_no");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_trn_project_so_code_project",
-                table: "trn_project_so",
-                column: "code_project");
 
             migrationBuilder.CreateIndex(
                 name: "IX_trn_project_so_nipp",
@@ -478,19 +476,24 @@ namespace KAPMProjectManagementApi.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_trn_project_so_project_def",
+                table: "trn_project_so",
+                column: "project_def");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_trn_project_so_role_id",
                 table: "trn_project_so",
                 column: "role_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_trn_project_timeline_code_project",
+                name: "IX_trn_project_timeline_project_def",
                 table: "trn_project_timeline",
-                column: "code_project");
+                column: "project_def");
 
             migrationBuilder.CreateIndex(
-                name: "IX_trn_schedule_invoice_TrnProjectId_TrnProjectCodeProject",
+                name: "IX_trn_schedule_invoice_project_def",
                 table: "trn_schedule_invoice",
-                columns: new[] { "TrnProjectId", "TrnProjectCodeProject" });
+                column: "project_def");
         }
 
         /// <inheritdoc />

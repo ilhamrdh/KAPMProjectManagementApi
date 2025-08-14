@@ -18,7 +18,7 @@ namespace KAPMProjectManagementApi.Mappers
                 Reason = model.Reason,
                 Status = model.Status,
                 Active = model.Active,
-                WBSNo = model.WBSNo,
+                WBSElement = model.WBSElement,
                 TrnProject = model.TrnProject?.ToProjectSimpleResponses(),
                 TrnProjectTimeline = model.TrnProjectTimeline.ToProjectTimelineSimpleResponse(),
             };
@@ -34,21 +34,21 @@ namespace KAPMProjectManagementApi.Mappers
             };
         }
 
-        public static TrnProjectAdendum ToProjectAdendumFromRequest(this ProjectAdendumRequestDto model)
+        public static TrnProjectAdendum ToProjectAdendumFromRequest(this ProjectAdendumRequestDto request)
         {
             return new TrnProjectAdendum
             {
-                AdendumNo = model.AdendumNo,
-                Active = model.Active,
-                CodeProject = model.CodeProject,
-                CostAfter = model.CostAfter,
-                CostBefore = model.CostBefore,
-                DateAfter = model.DateAfter,
-                DateBefore = model.DateBefore,
-                Reason = model.Reason,
-                Status = model.Status,
-                TypeAdendum = model.TypeAdendum,
-                WBSNo = model.WBSNo
+                AdendumNo = request.AdendumNo,
+                Active = request.Active,
+                ProjectDef = request.ProjectDef,
+                CostAfter = request.CostAfter,
+                CostBefore = request.CostBefore,
+                DateAfter = request.DateAfter,
+                DateBefore = request.DateBefore,
+                Reason = request.Reason,
+                Status = request.Status,
+                TypeAdendum = request.TypeAdendum,
+                WBSElement = request.WBSElement
             };
         }
     }

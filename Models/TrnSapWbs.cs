@@ -1,11 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using KAPMProjectManagementApi.Emun;
 
 namespace KAPMProjectManagementApi.Models
 {
-    [Table("trn_project_timeline")]
-    public class TrnProjectTimeline
+    [Table("trn_sap_wbs")]
+    public class TrnSapWbs
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,19 +18,11 @@ namespace KAPMProjectManagementApi.Models
         [Column("wbs_level", TypeName = "varchar(50)")]
         public int WBSLevel { get; set; }
 
-
         [Column("wbs_desc", TypeName = "varchar(50)")]
         public string WBSDesc { get; set; } = string.Empty;
 
-        [ForeignKey("TrnProject")]
-        [Column("project_def", TypeName = "varchar(50)")]
-        public string ProjectDef { get; set; } = string.Empty;
-
-        [Column("responsible", TypeName = "varchar(100)")]
-        public string Responsible { get; set; } = string.Empty;
-
-        [Column("status")]
-        public EProjectTimeline Status { get; set; }
+        [Column("project_type", TypeName = "varchar(100)")]
+        public string ProjectType { get; set; } = string.Empty;
 
         [Column("active", TypeName = "varchar(1)")]
         public string Active { get; set; } = "Y";

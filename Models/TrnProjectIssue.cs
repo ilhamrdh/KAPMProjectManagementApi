@@ -17,8 +17,8 @@ namespace KAPMProjectManagementApi.Models
         public string NoIssue { get; set; } = default!;
 
         [ForeignKey("TrnProject")]
-        [Column("code_project", TypeName = "varchar(50)")]
-        public string CodeProject { get; set; } = default!;
+        [Column("project_def", TypeName = "varchar(50)")]
+        public string ProjectDef { get; set; } = default!;
 
         [ForeignKey("TrnProjectReport")]
         [Column("week_no", TypeName = "varchar(50)")]
@@ -28,8 +28,8 @@ namespace KAPMProjectManagementApi.Models
         [Column("no_sr", TypeName = "varchar(50)")]
         public string NoSr { get; set; } = default!;
 
-        [Column("wbs_no", TypeName = "varchar(50)")]
-        public string WBSNo { get; set; } = default!;
+        [Column("wbs_element", TypeName = "varchar(50)")]
+        public string WBSElement { get; set; } = default!;
 
         [Column("problem", TypeName = "varchar(255)")]
         public string Problem { get; set; } = string.Empty;

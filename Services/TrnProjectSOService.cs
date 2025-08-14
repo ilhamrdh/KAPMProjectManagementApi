@@ -23,8 +23,8 @@ namespace KAPMProjectManagementApi.Services
         }
         public async Task<ProjectSOSimpleResponse> CreateProjectSOAsync(ProjectSORequestCreateDto reuqest)
         {
-            var project = await _projectRepository.ExistsAsync(reuqest.CodeProject);
-            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.CodeProject} not found.");
+            var project = await _projectRepository.ExistsAsync(reuqest.ProjectDef);
+            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.ProjectDef} not found.");
 
             var role = await _roleProjectRepository.ExistsAsync(reuqest.RoleId);
             if (!role) throw new KeyNotFoundException($"Data with Role Id {reuqest.RoleId} not found.");
@@ -55,8 +55,8 @@ namespace KAPMProjectManagementApi.Services
             var exist = await _repository.ExistsAsync(reuqest.Id);
             if (!exist) throw new KeyNotFoundException($"Data with Id {reuqest.Id} not found.");
 
-            var project = await _projectRepository.ExistsAsync(reuqest.CodeProject);
-            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.CodeProject} not found.");
+            var project = await _projectRepository.ExistsAsync(reuqest.ProjectDef);
+            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.ProjectDef} not found.");
 
             var role = await _roleProjectRepository.ExistsAsync(reuqest.RoleId);
             if (!role) throw new KeyNotFoundException($"Data with Role Id {reuqest.RoleId} not found.");

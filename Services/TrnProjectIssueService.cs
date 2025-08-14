@@ -31,8 +31,8 @@ namespace KAPMProjectManagementApi.Services
             var exist = await _repository.ExistsAsync(reuqest.NoSr);
             if (exist) throw new BadRequestException($"Data with No SR {reuqest.NoSr} already exist.");
 
-            var project = await _projectRepository.ExistsAsync(reuqest.CodeProject);
-            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.CodeProject} not found.");
+            var project = await _projectRepository.ExistsAsync(reuqest.ProjectDef);
+            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.ProjectDef} not found.");
 
             var timeline = await _projectTimelineRepository.ExistsAsync(reuqest.NoSr);
             if (!timeline) throw new KeyNotFoundException($"Data with No SR {reuqest.NoSr} not found.");
@@ -66,8 +66,8 @@ namespace KAPMProjectManagementApi.Services
             var exist = await _repository.ExistsAsync(reuqest.NoIssue);
             if (!exist) throw new KeyNotFoundException($"Data with No Issue {reuqest.NoIssue} not found.");
 
-            var project = await _projectRepository.ExistsAsync(reuqest.CodeProject);
-            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.CodeProject} not found.");
+            var project = await _projectRepository.ExistsAsync(reuqest.ProjectDef);
+            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.ProjectDef} not found.");
 
             var timeline = await _projectTimelineRepository.ExistsAsync(reuqest.NoSr);
             if (!timeline) throw new KeyNotFoundException($"Data with No SR {reuqest.NoSr} not found.");

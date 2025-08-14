@@ -21,12 +21,12 @@ namespace KAPMProjectManagementApi.Models
         public string WeekNo { get; set; } = default!;
 
         [ForeignKey("TrnProject")]
-        [Column("code_project")]
-        public string CodeProject { get; set; } = default!;
+        [Column("project_def", TypeName = "varchar(50)")]
+        public string ProjectDef { get; set; } = default!;
 
         [ForeignKey("TrnProjectTimeline")]
-        [Column("wbs_no", TypeName = "varchar(50)")]
-        public string WBSNo { get; set; } = default!;
+        [Column("wbs_element", TypeName = "varchar(50)")]
+        public string WBSElement { get; set; } = default!;
 
         [Column("plan_date")]
         [DataType(DataType.DateTime)]
@@ -35,6 +35,12 @@ namespace KAPMProjectManagementApi.Models
         [Column("actual_date")]
         [DataType(DataType.DateTime)]
         public DateTime ActualDate { get; set; }
+
+        [Column("plan_persentage")]
+        public double PlanPersentage { get; set; }
+
+        [Column("actual_persentage")]
+        public double ActualPersentage { get; set; }
 
         [Column("status")]
         public EProjectReportDtl Status { get; set; }

@@ -53,7 +53,7 @@ namespace KAPMProjectManagementApi.Repositories
             exist.RoleId = model.RoleId;
             exist.StartDate = model.StartDate;
             exist.FinishDate = model.FinishDate;
-            exist.CodeProject = model.CodeProject;
+            exist.ProjectDef = model.ProjectDef;
             exist.UserUpdate = model.UserUpdate;
             exist.DateUpdate = DateTime.UtcNow;
             _context.TrnProjectSO.Update(exist);

@@ -34,7 +34,7 @@ namespace KAPMProjectManagementApi.Mappers
             {
                 Name = model.Name,
                 Nipp = model.Nipp,
-                CodeProject = model.CodeProject,
+                ProjectDef = model.ProjectDef,
                 RoleId = model.RoleId,
                 Active = model.Active,
                 StartDate = model.StartDate,
@@ -48,7 +48,7 @@ namespace KAPMProjectManagementApi.Mappers
             {
                 Name = model.Name,
                 Nipp = model.Nipp,
-                CodeProject = model.CodeProject,
+                ProjectDef = model.ProjectDef,
                 RoleId = model.RoleId,
                 Active = model.Active,
                 StartDate = model.StartDate,

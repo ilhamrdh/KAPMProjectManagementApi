@@ -17,11 +17,11 @@ namespace KAPMProjectManagementApi.Services
         }
         public async Task<ProjectTimelineSimpleResponse> CreateProjectTimelineAsync(ProjectTimelineRequestDto request)
         {
-            var exist = await _repository.ExistsAsync(request.WBSNo);
-            if (exist) throw new BadRequestException($"Data with WBS No {request.WBSNo} already exist.");
+            var exist = await _repository.ExistsAsync(request.WBSElement);
+            if (exist) throw new BadRequestException($"Data with WBS No {request.WBSElement} already exist.");
 
-            var project = await _projectRepository.ExistsAsync(request.CodeProject);
-            if (!project) throw new KeyNotFoundException($"Data with Project Code {request.CodeProject} not found.");
+            var project = await _projectRepository.ExistsAsync(request.ProjectDef);
+            if (!project) throw new KeyNotFoundException($"Data with Project Code {request.ProjectDef} not found.");
 
             var p = ProjectTimelineMapper.ToProjectTimelineFromRequest(request);
             var createP = await _repository.CreateAsync(p);
@@ -34,20 +34,20 @@ namespace KAPMProjectManagementApi.Services
             return result.Select(p => p.ToProjectTimelineSimpleResponse()).ToList();
         }
 
-        public async Task<ProjectTimelineResponse> GetProjectTimelineByNoWBSAsync(string wbsno)
+        public async Task<ProjectTimelineResponse> GetProjectTimelineByWBSElementAsync(string wbsElement)
         {
-            var result = await _repository.GetByNoWBSAsync(wbsno);
-            if (result == null) throw new KeyNotFoundException($"Data with WBS No {wbsno} not found.");
+            var result = await _repository.GetByWBSElementAsync(wbsElement);
+            if (result == null) throw new KeyNotFoundException($"Data with WBS No {wbsElement} not found.");
             return result.ToProjectTimelineResponse();
         }
 
         public async Task<ProjectTimelineSimpleResponse> UpdateProjectTimelineAsync(ProjectTimelineRequestDto request)
         {
-            var exist = await _repository.ExistsAsync(request.WBSNo);
-            if (!exist) throw new KeyNotFoundException($"Data with WBS No {request.WBSNo} not found.");
+            var exist = await _repository.ExistsAsync(request.WBSElement);
+            if (!exist) throw new KeyNotFoundException($"Data with WBS No {request.WBSElement} not found.");
 
-            var project = await _projectRepository.ExistsAsync(request.CodeProject);
-            if (!project) throw new KeyNotFoundException($"Data with Project Code {request.CodeProject} not found.");
+            var project = await _projectRepository.ExistsAsync(request.ProjectDef);
+            if (!project) throw new KeyNotFoundException($"Data with Project Code {request.ProjectDef} not found.");
 
             var p = ProjectTimelineMapper.ToProjectTimelineFromRequest(request);
             var updateP = await _repository.UpdateAsync(p);

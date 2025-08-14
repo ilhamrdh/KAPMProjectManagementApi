@@ -44,7 +44,7 @@ namespace KAPMProjectManagementApi.Repositories
             if (pr == null) return null!;
 
             pr.Deviation = model.Deviation;
-            pr.CodeProject = model.CodeProject;
+            pr.ProjectDef = model.ProjectDef;
             pr.Active = model.Active;
             pr.ActualPersentage = model.ActualPersentage;
             pr.DateReport = model.DateReport;

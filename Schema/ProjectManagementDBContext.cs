@@ -20,6 +20,8 @@ namespace KAPMProjectManagementApi.Schema
         public DbSet<TrnProjectSO> TrnProjectSO { get; set; }
         public DbSet<TrnProjectTimeline> TrnProjectTimeline { get; set; }
         public DbSet<TrnScheduleInvoice> TrnScheduleInvoice { get; set; }
+        public DbSet<TrnSapWbs> TrnSapWbs { get; set; }
+        public DbSet<TrnSapHrd> TrnSapHrd { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -33,7 +35,7 @@ namespace KAPMProjectManagementApi.Schema
             .HasKey(e => new { e.Id, e.UnitProject });
 
             modelBuilder.Entity<TrnProject>()
-            .HasKey(e => new { e.Id, e.CodeProject });
+            .HasKey(e => new { e.Id, e.ProjectDef });
 
             modelBuilder.Entity<MstEmployee>()
             .HasKey(e => new { e.Id, e.Nipp });
@@ -57,10 +59,16 @@ namespace KAPMProjectManagementApi.Schema
             .HasKey(e => new { e.Id });
 
             modelBuilder.Entity<TrnProjectTimeline>()
-            .HasKey(e => new { e.Id, e.WBSNo });
+            .HasKey(e => new { e.Id, e.WBSElement });
 
             modelBuilder.Entity<TrnScheduleInvoice>()
             .HasKey(e => new { e.Id, e.No });
+
+            modelBuilder.Entity<TrnSapWbs>()
+            .HasKey(e => new { e.Id, e.WBSElement });
+
+            modelBuilder.Entity<TrnSapHrd>()
+            .HasKey(e => new { e.Id, e.ProjectDef });
 
 
             // enum
@@ -130,7 +138,7 @@ namespace KAPMProjectManagementApi.Schema
             modelBuilder.Entity<TrnProject>()
                 .HasOne(p => p.MstUnitProject)
                 .WithMany(u => u.TrnProjects)
-                .HasForeignKey(p => p.UnitProject)
+                .HasForeignKey(p => p.ProjectProfile)
                 .HasPrincipalKey(u => u.UnitProject)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -138,36 +146,44 @@ namespace KAPMProjectManagementApi.Schema
             modelBuilder.Entity<MstProjectManager>()
                 .HasOne(pm => pm.TrnProject)
                 .WithOne(p => p.MstProjectManager)
-                .HasForeignKey<TrnProject>(p => p.PMProject)
+                .HasForeignKey<TrnProject>(p => p.ProjectResponsible)
                 .HasPrincipalKey<MstProjectManager>(pm => pm.Nipp)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TrnScheduleInvoice>()
+                .HasOne(s => s.TrnProject)
+                .WithMany(p => p.TrnScheduleInvoice)
+                .HasForeignKey(s => s.ProjectDef)
+                .HasPrincipalKey(p => p.ProjectDef)
+                .OnDelete(DeleteBehavior.Restrict);
+
 
             modelBuilder.Entity<TrnProjectAdendum>()
                 .HasOne(p => p.TrnProject)
                 .WithMany(pa => pa.TrnProjectAdendums)
-                .HasForeignKey(p => p.CodeProject)
-                .HasPrincipalKey(pa => pa.CodeProject)
+                .HasForeignKey(p => p.ProjectDef)
+                .HasPrincipalKey(pa => pa.ProjectDef)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<TrnProjectAdendum>()
                 .HasOne(pl => pl.TrnProjectTimeline)
                 .WithMany(pa => pa.TrnProjectAdendums)
-                .HasForeignKey(pl => pl.WBSNo)
-                .HasPrincipalKey(pa => pa.WBSNo)
+                .HasForeignKey(pl => pl.WBSElement)
+                .HasPrincipalKey(pa => pa.WBSElement)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<TrnProjectReport>()
                 .HasOne(p => p.TrnProject)
                 .WithMany(pr => pr.TrnProjectReports)
-                .HasForeignKey(p => p.CodeProject)
-                .HasPrincipalKey(pr => pr.CodeProject)
+                .HasForeignKey(p => p.ProjectDef)
+                .HasPrincipalKey(pr => pr.ProjectDef)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<TrnProjectSO>()
                 .HasOne(p => p.TrnProject)
                 .WithMany(ps => ps.TrnProjectSOs)
-                .HasForeignKey(p => p.CodeProject)
-                .HasPrincipalKey(ps => ps.CodeProject)
+                .HasForeignKey(p => p.ProjectDef)
+                .HasPrincipalKey(ps => ps.ProjectDef)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<TrnProjectSO>()
@@ -187,8 +203,8 @@ namespace KAPMProjectManagementApi.Schema
             modelBuilder.Entity<TrnProjectTimeline>()
                 .HasOne(p => p.TrnProject)
                 .WithMany(pt => pt.TrnProjectTimelines)
-                .HasForeignKey(p => p.CodeProject)
-                .HasPrincipalKey(pt => pt.CodeProject)
+                .HasForeignKey(p => p.ProjectDef)
+                .HasPrincipalKey(pt => pt.ProjectDef)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<TrnProjectReportDtl>()
@@ -201,22 +217,22 @@ namespace KAPMProjectManagementApi.Schema
             modelBuilder.Entity<TrnProjectReportDtl>()
                 .HasOne(p => p.TrnProject)
                 .WithMany(prd => prd.TrnProjectReportDtls)
-                .HasForeignKey(p => p.CodeProject)
-                .HasPrincipalKey(prd => prd.CodeProject)
+                .HasForeignKey(p => p.ProjectDef)
+                .HasPrincipalKey(prd => prd.ProjectDef)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<TrnProjectReportDtl>()
                 .HasOne(pl => pl.TrnProjectTimeline)
                 .WithMany(prd => prd.TrnProjectReportDtls)
-                .HasForeignKey(pl => pl.WBSNo)
-                .HasPrincipalKey(prd => prd.WBSNo)
+                .HasForeignKey(pl => pl.WBSElement)
+                .HasPrincipalKey(prd => prd.WBSElement)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<TrnProjectIssue>()
                 .HasOne(p => p.TrnProject)
                 .WithMany(pi => pi.TrnProjectIssues)
-                .HasForeignKey(p => p.CodeProject)
-                .HasPrincipalKey(pi => pi.CodeProject)
+                .HasForeignKey(p => p.ProjectDef)
+                .HasPrincipalKey(pi => pi.ProjectDef)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<TrnProjectIssue>()

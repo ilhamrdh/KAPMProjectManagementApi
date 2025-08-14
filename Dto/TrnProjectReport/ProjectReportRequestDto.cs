@@ -10,10 +10,10 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectReport
         [JsonProperty("week_no")]
         public string WeekNo { get; set; } = default!;
 
-        [Required(ErrorMessage = "CodeProject is required")]
-        [StringLength(50, ErrorMessage = "CodeProject must be 50 characters")]
-        [JsonProperty("code_project")]
-        public string CodeProject { get; set; } = default!; // FK to trn_project
+        [Required(ErrorMessage = "Project Def is required")]
+        [StringLength(50, ErrorMessage = "Project Def must be 50 characters")]
+        [JsonProperty("project_def")]
+        public string ProjectDef { get; set; } = default!; // FK to trn_project
 
         [Required(ErrorMessage = "DateReport is required")]
         [DataType(DataType.DateTime)]

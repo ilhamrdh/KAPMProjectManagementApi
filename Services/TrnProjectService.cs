@@ -23,8 +23,8 @@ namespace KAPMProjectManagementApi.Services
         }
         public async Task<ProjectResponse> CreateProjectAsync(ProjectRequestDto request)
         {
-            var exist = await _repository.ExistsAsync(request.CodeProject);
-            if (exist) throw new BadRequestException($"Data with Code Project {request.CodeProject} already exist.");
+            var exist = await _repository.ExistsAsync(request.ProjectDef);
+            if (exist) throw new BadRequestException($"Data with Code Project {request.ProjectDef} already exist.");
 
             var unit = await _unitProjectRepository.ExistsAsync(request.UnitProject);
             if (!unit) throw new KeyNotFoundException($"Data with Unit Project {request.UnitProject} not found.");
@@ -43,17 +43,17 @@ namespace KAPMProjectManagementApi.Services
             return p.Select(p => p.ToProjectResponses()).ToList();
         }
 
-        public async Task<ProjectResponse?> GetProjectByCodeProjectAsync(string codeProject)
+        public async Task<ProjectResponse?> GetProjectByProjectDefAsync(string projectDef)
         {
-            var p = await _repository.GetByCodeProjectAsync(codeProject);
-            if (p == null) throw new KeyNotFoundException($"Data with Code Project {codeProject} not found.");
+            var p = await _repository.GetByProjectDefAsync(projectDef);
+            if (p == null) throw new KeyNotFoundException($"Data with Code Project {projectDef} not found.");
             return p.ToProjectResponses();
         }
 
         public async Task<ProjectResponse> UpdateProjectAsync(ProjectRequestDto request)
         {
-            var exist = await _repository.GetByCodeProjectAsync(request.CodeProject);
-            if (exist == null) throw new KeyNotFoundException($"Data with Code Project {request.CodeProject} not found.");
+            var exist = await _repository.GetByProjectDefAsync(request.ProjectDef);
+            if (exist == null) throw new KeyNotFoundException($"Data with Code Project {request.ProjectDef} not found.");
 
             var unit = await _unitProjectRepository.ExistsAsync(request.UnitProject);
             if (!unit) throw new KeyNotFoundException($"Data with Unit Project {request.UnitProject} not found.");

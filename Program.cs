@@ -1,4 +1,5 @@
 using System.Reflection;
+using KAPMProjectManagementApi.Interfaces.Auth;
 using KAPMProjectManagementApi.Interfaces.MasterEmployee;
 using KAPMProjectManagementApi.Interfaces.MasterProjectManager;
 using KAPMProjectManagementApi.Interfaces.MasterRoleProject;
@@ -83,6 +84,8 @@ builder.Services.AddScoped<ITrnProjectReportDtlService, TrnProjectReportDtlServi
 builder.Services.AddScoped<ITrnProjectIssueService, TrnProjectIssueService>();
 builder.Services.AddScoped<ITrnProjectAdendumService, TrnProjectAdendumService>();
 builder.Services.AddScoped<ITrnScheduleInvoiceService, TrnScheduleInvoiceService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddHttpClient();
 
 builder.Services.AddProblemDetails();
 

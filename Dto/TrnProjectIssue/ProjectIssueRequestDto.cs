@@ -15,10 +15,10 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectIssue
         [StringLength(50, ErrorMessage = "No Issue must be at most 50 characters long.")]
         public string NoIssue { get; set; } = default!;
 
-        [JsonProperty("code_project")]
-        [Required(ErrorMessage = "Code Project is required")]
-        [StringLength(50, ErrorMessage = "Code Project must be at most 50 characters long.")]
-        public string CodeProject { get; set; } = default!;
+        [JsonProperty("project_def")]
+        [Required(ErrorMessage = "Project Def is required")]
+        [StringLength(50, ErrorMessage = "Project Def must be at most 50 characters long.")]
+        public string ProjectDef { get; set; } = default!;
 
         [JsonProperty("week_no")]
         [Required(ErrorMessage = "Week No is required")]
@@ -30,10 +30,10 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectIssue
         [StringLength(50, ErrorMessage = "No Sr must be at most 50 characters long.")]
         public string NoSr { get; set; } = default!;
 
-        [JsonProperty("wbs_no")]
-        [Required(ErrorMessage = "wbs no is required")]
-        [StringLength(50, ErrorMessage = "wbs no must be at most 50 characters long.")]
-        public string WBSNo { get; set; } = default!;
+        [JsonProperty("wbs_element")]
+        [Required(ErrorMessage = "wbs element is required")]
+        [StringLength(50, ErrorMessage = "wbs element must be at most 50 characters long.")]
+        public string WBSElement { get; set; } = default!;
 
         [JsonProperty("problem")]
         [Required(ErrorMessage = "Problem is required")]

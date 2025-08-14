@@ -63,10 +63,10 @@ namespace KAPMProjectManagementApi.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{wbs_no}")] // wbs_no
-        public async Task<IActionResult> GetByCodeProjectAsync(string wbs_no)
+        [HttpGet("{wbs_element}")] // wbs_element
+        public async Task<IActionResult> GetByCodeProjectAsync(string wbs_element)
         {
-            var result = await _service.GetProjectTimelineByNoWBSAsync(wbs_no);
+            var result = await _service.GetProjectTimelineByWBSElementAsync(wbs_element);
             WebResponse<ProjectTimelineResponse> response = new WebResponse<ProjectTimelineResponse>
             {
                 StatusCode = 200,

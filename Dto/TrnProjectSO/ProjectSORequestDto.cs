@@ -7,17 +7,22 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectSO
     {
         [Required(ErrorMessage = "Code Project is required")]
         [StringLength(50, ErrorMessage = "Code Project must be at most 50 characters long")]
-        public string CodeProject { get; set; } = string.Empty;
+        [JsonProperty("project_def")]
+        public string ProjectDef { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Role Id is required")]
         [StringLength(50, ErrorMessage = "Role Id must be at most 50 characters long")]
+        [JsonProperty("role_id")]
         public string RoleId { get; set; } = default!; // FK master Role Project
+
         [Required(ErrorMessage = "Nipp is required")]
         [StringLength(50, ErrorMessage = "Nipp must be at most 50 characters long")]
+        [JsonProperty("nipp")]
         public string Nipp { get; set; } = default!; // FK master Employee
 
         [Required(ErrorMessage = "Name is required")]
         [StringLength(100, ErrorMessage = "Name must be at most 100 characters long")]
+        [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
         [Required(ErrorMessage = "Start Date is required")]
@@ -39,13 +44,17 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectSO
         [Required(ErrorMessage = "Id is required")]
         [Range(1, int.MaxValue, ErrorMessage = "Id must be greater than 0")]
         public int Id { get; set; }
+
         [Required(ErrorMessage = "Code Project is required")]
         [StringLength(50, ErrorMessage = "Code Project must be at most 50 characters long")]
-        public string CodeProject { get; set; } = string.Empty;
+        [JsonProperty("project_def")]
+        public string ProjectDef { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Role Id is required")]
         [StringLength(50, ErrorMessage = "Role Id must be at most 50 characters long")]
+        [JsonProperty("role_id")]
         public string RoleId { get; set; } = default!; // FK master Role Project
+
         [Required(ErrorMessage = "Nipp is required")]
         [StringLength(50, ErrorMessage = "Nipp must be at most 50 characters long")]
         public string Nipp { get; set; } = default!; // FK master Employee

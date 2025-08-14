@@ -1,3 +1,4 @@
+using KAPMProjectManagementApi.Dto.Web;
 using KAPMProjectManagementApi.Interfaces.TrnProject;
 using KAPMProjectManagementApi.Models;
 using KAPMProjectManagementApi.Schema;
@@ -19,26 +20,26 @@ namespace KAPMProjectManagementApi.Repositories
             return model;
         }
 
-        public async Task<bool> ExistsAsync(string codeProject)
+        public async Task<bool> ExistsAsync(string projectDef)
         {
-            return await _context.TrnProject.AsNoTracking().AnyAsync(x => x.CodeProject == codeProject);
+            return await _context.TrnProject.AsNoTracking().AnyAsync(x => x.ProjectDef == projectDef);
         }
 
-        public async Task<IEnumerable<TrnProject>> GetAllAsync()
+        public async Task<IEnumerable<TrnProject>> GetAllAsync(QuerySearch qs)
         {
             return await _context.TrnProject.AsNoTracking().Include(x => x.MstUnitProject).Include(x => x.MstProjectManager).ToListAsync();
         }
 
-        public async Task<TrnProject?> GetByCodeProjectAsync(string codeProject)
+        public async Task<TrnProject?> GetByProjectDefAsync(string projectDef)
         {
-            var p = await _context.TrnProject.FirstOrDefaultAsync(x => x.CodeProject.Equals(codeProject));
+            var p = await _context.TrnProject.FirstOrDefaultAsync(x => x.ProjectDef == projectDef);
             if (p == null) return null;
             return p;
         }
 
         public async Task<TrnProject> UpdateAsync(TrnProject model)
         {
-            var exist = await _context.TrnProject.FirstOrDefaultAsync(x => x.CodeProject == model.CodeProject);
+            var exist = await _context.TrnProject.FirstOrDefaultAsync(x => x.ProjectDef == model.ProjectDef);
             if (exist == null) return null!;
 
             exist.AccountName = model.AccountName;
@@ -54,11 +55,11 @@ namespace KAPMProjectManagementApi.Repositories
             exist.ProgressReport = model.ProgressReport;
             exist.StartDateSPMK = model.StartDateSPMK;
             exist.StartDate = model.StartDate;
-            exist.FinishDate = model.FinishDate;
+            exist.EndDate = model.EndDate;
             exist.PlanPersentage = model.PlanPersentage;
             exist.PaymentMethod = model.PaymentMethod;
-            exist.PMProject = model.PMProject;
-            exist.UnitProject = model.UnitProject;
+            exist.ProjectResponsible = model.ProjectResponsible;
+            exist.ProjectProfile = model.ProjectProfile;
             exist.UserUpdate = model.UserUpdate;
             exist.DateUpdate = DateTime.Now;
 

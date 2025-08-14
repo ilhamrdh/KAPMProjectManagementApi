@@ -16,9 +16,9 @@ namespace KAPMProjectManagementApi.Models
         [Column("no", TypeName = "varchar(50)")]
         public string No { get; set; } = default!;
 
-        [ForeignKey("code_project")]
-        [Column("code_project", TypeName = "varchar(50)")]
-        public string CodeProject { get; set; } = default!;
+        [ForeignKey("TrnProject")]
+        [Column("project_def", TypeName = "varchar(50)")]
+        public string ProjectDef { get; set; } = default!;
 
         [Column("type")]
         public ETypeInvoice Type { get; set; }

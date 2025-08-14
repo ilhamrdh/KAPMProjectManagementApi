@@ -20,8 +20,8 @@ namespace KAPMProjectManagementApi.Services
             var exist = await _repository.ExistsAsync(reuqest.WeekNo);
             if (exist) throw new BadRequestException($"Data with Week No {reuqest.WeekNo} already exist.");
 
-            var project = await _projectRepository.ExistsAsync(reuqest.CodeProject);
-            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.CodeProject} not found.");
+            var project = await _projectRepository.ExistsAsync(reuqest.ProjectDef);
+            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.ProjectDef} not found.");
 
             var p = ProjectReportMapper.ToProjectReportFromRequest(reuqest);
             var createP = await _repository.CreateAsync(p);
@@ -46,8 +46,8 @@ namespace KAPMProjectManagementApi.Services
             var exist = await _repository.ExistsAsync(reuqest.WeekNo);
             if (!exist) throw new KeyNotFoundException($"Data with Week No {reuqest.WeekNo} not found.");
 
-            var project = await _projectRepository.ExistsAsync(reuqest.CodeProject);
-            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.CodeProject} not found.");
+            var project = await _projectRepository.ExistsAsync(reuqest.ProjectDef);
+            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.ProjectDef} not found.");
 
             var pr = ProjectReportMapper.ToProjectReportFromRequest(reuqest);
             var update = await _repository.UpdateAsync(pr);

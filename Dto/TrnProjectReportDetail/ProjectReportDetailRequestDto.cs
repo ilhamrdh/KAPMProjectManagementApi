@@ -16,15 +16,15 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectReportDetail
         [StringLength(50, ErrorMessage = "week_no must be 50 characters")]
         public string WeekNo { get; set; } = default!;
 
-        [JsonProperty("code_project")]
-        [Required(ErrorMessage = "code_project is required")]
-        [StringLength(50, ErrorMessage = "code_project must be 50 characters")]
-        public string CodeProject { get; set; } = default!;
+        [JsonProperty("project_def")]
+        [Required(ErrorMessage = "Project Def is required")]
+        [StringLength(50, ErrorMessage = "Project Def must be 50 characters")]
+        public string ProjectDef { get; set; } = default!;
 
-        [JsonProperty("wbs_no")]
-        [Required(ErrorMessage = "wbs_no is required")]
-        [StringLength(50, ErrorMessage = "wbs_no must be 50 characters")]
-        public string WBSNo { get; set; } = default!;
+        [JsonProperty("wbs_element")]
+        [Required(ErrorMessage = "wbs_element is required")]
+        [StringLength(50, ErrorMessage = "wbs_element must be 50 characters")]
+        public string WBSElement { get; set; } = default!;
 
         [Required(ErrorMessage = "plan_date is required")]
         [JsonProperty("plan_date")]

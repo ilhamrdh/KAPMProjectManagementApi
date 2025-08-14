@@ -44,7 +44,7 @@ namespace KAPMProjectManagementApi.Repositories
 
             exist.TotalPlan = model.TotalPlan;
             exist.DatePlan = model.DatePlan;
-            exist.CodeProject = model.CodeProject;
+            exist.ProjectDef = model.ProjectDef;
             exist.Active = model.Active;
             exist.Status = model.Status;
             exist.Type = model.Type;

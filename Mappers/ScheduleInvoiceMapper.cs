@@ -9,7 +9,7 @@ namespace KAPMProjectManagementApi.Mappers
         {
             return new ScheduleInvoiceResponse
             {
-                CodeProject = model.CodeProject,
+                ProjectDef = model.ProjectDef,
                 DateActual = model.DateActual,
                 DatePlan = model.DatePlan,
                 No = model.No,
@@ -41,7 +41,7 @@ namespace KAPMProjectManagementApi.Mappers
             return new TrnScheduleInvoice
             {
                 No = model.No,
-                CodeProject = model.CodeProject,
+                ProjectDef = model.ProjectDef,
                 DateActual = model.DateActual,
                 DatePlan = model.DatePlan,
                 ProgressReport = model.ProgressReport,

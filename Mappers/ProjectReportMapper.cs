@@ -39,7 +39,7 @@ namespace KAPMProjectManagementApi.Mappers
                 Deviation = request.Deviation,
                 Active = request.Active,
                 ActualPersentage = request.ActualPersentage,
-                CodeProject = request.CodeProject,
+                ProjectDef = request.ProjectDef,
                 DateReport = request.DateReport,
                 PlanPersentage = request.PlanPersentage
             };

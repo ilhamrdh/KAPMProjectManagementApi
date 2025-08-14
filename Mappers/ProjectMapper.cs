@@ -9,10 +9,13 @@ namespace KAPMProjectManagementApi.Mappers
         {
             return new ProjectResponse
             {
-                CodeProject = model.CodeProject,
-                DescProject = model.DescProject,
+                ProjectDef = model.ProjectDef,
+                ProjectDesc = model.ProjectDesc,
                 NoSPMK = model.NoSPMK,
                 NoContract = model.NoContract,
+                CompanyCode = model.CompanyCode,
+                FiscalYear = model.FiscalYear,
+                ProjectLocation = model.ProjectLocation,
                 PaymentMethod = model.PaymentMethod,
                 ContractValue = model.ContractValue,
                 Bank = model.Bank,
@@ -24,7 +27,7 @@ namespace KAPMProjectManagementApi.Mappers
                 PPH = model.PPH,
                 StartDateSPMK = model.StartDateSPMK,
                 StartDate = model.StartDate,
-                FinishDate = model.FinishDate,
+                EndDate = model.EndDate,
                 PlanPersentage = model.PlanPersentage,
                 ActualPersentage = model.ActualPersentage,
                 ProgressReport = model.ProgressReport,
@@ -38,8 +41,10 @@ namespace KAPMProjectManagementApi.Mappers
         {
             return new ProjectSimpleResponse
             {
-                CodeProject = model.CodeProject,
-                DescProject = model.DescProject,
+                ProjectDef = model.ProjectDef,
+                ProjectDesc = model.ProjectDesc,
+                ProjectLocation = model.ProjectLocation,
+                ProjectOwner = model.ProjectOwner
             };
         }
 
@@ -47,13 +52,12 @@ namespace KAPMProjectManagementApi.Mappers
         {
             return new TrnProject
             {
-                CodeProject = request.CodeProject,
-                DescProject = request.DescProject,
+                ProjectDef = request.ProjectDef,
                 NoSPMK = request.NoSPMK,
                 ProjectOwner = request.ProjectOwner,
                 NoContract = request.NoContract,
-                UnitProject = request.UnitProject,
-                PMProject = request.PMProject,
+                ProjectProfile = request.UnitProject,
+                ProjectResponsible = request.PMProject,
                 PaymentMethod = request.PaymentMethod,
                 ContractValue = request.ContractValue,
                 Bank = request.Bank,
@@ -63,12 +67,9 @@ namespace KAPMProjectManagementApi.Mappers
                 PPH = request.PPH,
                 Active = request.Active,
                 StartDateSPMK = request.StartDateSPMK,
-                StartDate = request.StartDate,
-                FinishDate = request.FinishDate,
                 PlanPersentage = request.PlanPersentage,
                 ActualPersentage = request.ActualPersentage,
                 ProgressReport = request.ProgressReport,
-                UserAdd = request.UserAdd,
             };
         }
 

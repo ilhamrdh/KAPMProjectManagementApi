@@ -16,16 +16,16 @@ namespace KAPMProjectManagementApi.Models
         [Column("adendum_no", TypeName = "varchar(50)")]
         public string AdendumNo { get; set; } = default!;
 
-        [ForeignKey("TrnProject")]
-        [Column("code_project", TypeName = "varchar(50)")]
-        public string CodeProject { get; set; } = default!;
-
         [Column("type_adendum", TypeName = "varchar(50)")]
         public string TypeAdendum { get; set; } = string.Empty;
 
+        [ForeignKey("TrnProject")]
+        [Column("project_def", TypeName = "varchar(50)")]
+        public string ProjectDef { get; set; } = default!;
+
         [ForeignKey("TrnProjectTimeline")]
-        [Column("wbs_no", TypeName = "varchar(50)")]
-        public string WBSNo { get; set; } = default!;
+        [Column("wbs_element", TypeName = "varchar(50)")]
+        public string WBSElement { get; set; } = default!;
 
         [Column("cost_before", TypeName = "decimal(18,2)")]
         public double CostBefore { get; set; }

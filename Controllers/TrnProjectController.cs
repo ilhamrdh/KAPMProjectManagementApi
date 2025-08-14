@@ -42,10 +42,10 @@ namespace KAPMProjectManagementApi.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{code_project}")]
-        public async Task<IActionResult> GetByCodeProjectAsync(string code_project)
+        [HttpGet("{project_def}")]
+        public async Task<IActionResult> GetByCodeProjectAsync(string project_def)
         {
-            var result = await _service.GetProjectByCodeProjectAsync(code_project);
+            var result = await _service.GetProjectByProjectDefAsync(project_def);
             WebResponse<ProjectResponse> response = new WebResponse<ProjectResponse>
             {
                 StatusCode = 200,

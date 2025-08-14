@@ -6,24 +6,24 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectTimeline
 {
     public class ProjectTimelineRequestDto
     {
-        [Required(ErrorMessage = "WBS No is required")]
-        [StringLength(50, ErrorMessage = "WBS No cannot be longer than 50 characters")]
-        [JsonProperty("wbs_no")]
-        public string WBSNo { get; set; } = default!;
+        [Required(ErrorMessage = "WBS Element is required")]
+        [StringLength(50, ErrorMessage = "WBS Element cannot be longer than 50 characters")]
+        [JsonProperty("wbs_element")]
+        public string WBSElement { get; set; } = default!;
 
-        [Required(ErrorMessage = "Code Project is required")]
-        [StringLength(50, ErrorMessage = "Code Project cannot be longer than 50 characters")]
-        [JsonProperty("code_project")]
-        public string CodeProject { get; set; } = default!;
+        [Required(ErrorMessage = "Project Def is required")]
+        [StringLength(50, ErrorMessage = "Project Def cannot be longer than 50 characters")]
+        [JsonProperty("project_def")]
+        public string ProjectDef { get; set; } = default!;
 
         [Required(ErrorMessage = "WBS Level is required")]
         [StringLength(50, ErrorMessage = "WBS Level cannot be longer than 50 characters")]
         [JsonProperty("wbs_level")]
         public int WBSLevel { get; set; } = default!;
 
-        [StringLength(50, ErrorMessage = "WBS Name cannot be longer than 50 characters")]
-        [JsonProperty("wbs_name")]
-        public string WBSName { get; set; } = string.Empty;
+        [StringLength(50, ErrorMessage = "WBS Desc cannot be longer than 50 characters")]
+        [JsonProperty("wbs_desc")]
+        public string WBSDesc { get; set; } = string.Empty;
 
         [StringLength(50, ErrorMessage = "Project Name cannot be longer than 50 characters")]
         [JsonProperty("responsible")]
@@ -43,8 +43,8 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectTimeline
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.DateTime)]
-        [JsonProperty("finish_date")]
-        public DateTime FinishDate { get; set; }
+        [JsonProperty("end_date")]
+        public DateTime EndDate { get; set; }
 
     }
 }

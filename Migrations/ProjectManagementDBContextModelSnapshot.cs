@@ -237,9 +237,9 @@ namespace KAPMProjectManagementApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CodeProject")
+                    b.Property<string>("ProjectDef")
                         .HasColumnType("varchar(50)")
-                        .HasColumnName("code_project");
+                        .HasColumnName("project_def");
 
                     b.Property<string>("AccountName")
                         .IsRequired()
@@ -265,6 +265,11 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("varchar(10)")
                         .HasColumnName("bank");
 
+                    b.Property<string>("CompanyCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("company_code");
+
                     b.Property<string>("ContractValue")
                         .IsRequired()
                         .HasColumnType("varchar(50)")
@@ -278,14 +283,13 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_update");
 
-                    b.Property<string>("DescProject")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("desc_project");
-
-                    b.Property<DateTime>("FinishDate")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("finish_date");
+                        .HasColumnName("end_date");
+
+                    b.Property<DateTime>("FiscalYear")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("fiscal_year");
 
                     b.Property<string>("NoContract")
                         .IsRequired()
@@ -296,11 +300,6 @@ namespace KAPMProjectManagementApi.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasColumnName("no_spmk");
-
-                    b.Property<string>("PMProject")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("pm_project");
 
                     b.Property<string>("PPH")
                         .IsRequired()
@@ -321,10 +320,30 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("varchar(100)")
                         .HasColumnName("progress_report");
 
+                    b.Property<string>("ProjectDesc")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_desc");
+
+                    b.Property<string>("ProjectLocation")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_location");
+
                     b.Property<string>("ProjectOwner")
                         .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasColumnName("project_owner");
+
+                    b.Property<string>("ProjectProfile")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_profile");
+
+                    b.Property<string>("ProjectResponsible")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_responsible");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("timestamp with time zone")
@@ -338,11 +357,6 @@ namespace KAPMProjectManagementApi.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(20)")
                         .HasColumnName("status");
-
-                    b.Property<string>("UnitProject")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("unit_project");
 
                     b.Property<string>("UserAdd")
                         .IsRequired()
@@ -359,12 +373,12 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("working_method");
 
-                    b.HasKey("Id", "CodeProject");
+                    b.HasKey("Id", "ProjectDef");
 
-                    b.HasIndex("PMProject")
+                    b.HasIndex("ProjectProfile");
+
+                    b.HasIndex("ProjectResponsible")
                         .IsUnique();
-
-                    b.HasIndex("UnitProject");
 
                     b.ToTable("trn_project");
                 });
@@ -386,11 +400,6 @@ namespace KAPMProjectManagementApi.Migrations
                     b.Property<string>("AdendumNo")
                         .HasColumnType("varchar(50)")
                         .HasColumnName("adendum_no");
-
-                    b.Property<string>("CodeProject")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("code_project");
 
                     b.Property<double>("CostAfter")
                         .HasColumnType("decimal(18,2)")
@@ -416,6 +425,11 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_update");
 
+                    b.Property<string>("ProjectDef")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_def");
+
                     b.Property<string>("Reason")
                         .IsRequired()
                         .HasColumnType("varchar(255)")
@@ -425,6 +439,12 @@ namespace KAPMProjectManagementApi.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(20)")
                         .HasColumnName("status");
+
+                    b.Property<int?>("TrnSapWbsId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TrnSapWbsWBSElement")
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("TypeAdendum")
                         .IsRequired()
@@ -441,16 +461,18 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("user_update");
 
-                    b.Property<string>("WBSNo")
+                    b.Property<string>("WBSElement")
                         .IsRequired()
                         .HasColumnType("varchar(50)")
-                        .HasColumnName("wbs_no");
+                        .HasColumnName("wbs_element");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CodeProject");
+                    b.HasIndex("ProjectDef");
 
-                    b.HasIndex("WBSNo");
+                    b.HasIndex("WBSElement");
+
+                    b.HasIndex("TrnSapWbsId", "TrnSapWbsWBSElement");
 
                     b.ToTable("trn_project_adendum");
                 });
@@ -483,11 +505,6 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("varchar(1)")
                         .HasColumnName("active");
 
-                    b.Property<string>("CodeProject")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("code_project");
-
                     b.Property<DateTime>("DateAdd")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_add");
@@ -506,6 +523,11 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("problem");
 
+                    b.Property<string>("ProjectDef")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_def");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("varchar(20)")
@@ -521,10 +543,10 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("user_update");
 
-                    b.Property<string>("WBSNo")
+                    b.Property<string>("WBSElement")
                         .IsRequired()
                         .HasColumnType("varchar(50)")
-                        .HasColumnName("wbs_no");
+                        .HasColumnName("wbs_element");
 
                     b.Property<string>("WeekNo")
                         .IsRequired()
@@ -533,9 +555,9 @@ namespace KAPMProjectManagementApi.Migrations
 
                     b.HasKey("Id", "NoIssue");
 
-                    b.HasIndex("CodeProject");
-
                     b.HasIndex("NoSr");
+
+                    b.HasIndex("ProjectDef");
 
                     b.HasIndex("WeekNo");
 
@@ -564,11 +586,6 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("double precision")
                         .HasColumnName("actual_persentage");
 
-                    b.Property<string>("CodeProject")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("code_project");
-
                     b.Property<DateTime>("DateAdd")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_add");
@@ -590,6 +607,11 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("double precision")
                         .HasColumnName("plan_persentage");
 
+                    b.Property<string>("ProjectDef")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_def");
+
                     b.Property<string>("UserAdd")
                         .IsRequired()
                         .HasColumnType("varchar(50)")
@@ -602,7 +624,7 @@ namespace KAPMProjectManagementApi.Migrations
 
                     b.HasKey("Id", "WeekNo");
 
-                    b.HasIndex("CodeProject");
+                    b.HasIndex("ProjectDef");
 
                     b.ToTable("trn_project_report");
                 });
@@ -629,10 +651,9 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("actual_date");
 
-                    b.Property<string>("CodeProject")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("code_project");
+                    b.Property<double>("ActualPersentage")
+                        .HasColumnType("double precision")
+                        .HasColumnName("actual_persentage");
 
                     b.Property<DateTime>("DateAdd")
                         .HasColumnType("timestamp with time zone")
@@ -646,10 +667,25 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("plan_date");
 
+                    b.Property<double>("PlanPersentage")
+                        .HasColumnType("double precision")
+                        .HasColumnName("plan_persentage");
+
+                    b.Property<string>("ProjectDef")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_def");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("varchar(20)")
                         .HasColumnName("status");
+
+                    b.Property<int?>("TrnSapWbsId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TrnSapWbsWBSElement")
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("UserAdd")
                         .IsRequired()
@@ -661,10 +697,10 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("user_update");
 
-                    b.Property<string>("WBSNo")
+                    b.Property<string>("WBSElement")
                         .IsRequired()
                         .HasColumnType("varchar(50)")
-                        .HasColumnName("wbs_no");
+                        .HasColumnName("wbs_element");
 
                     b.Property<string>("WeekNo")
                         .IsRequired()
@@ -673,11 +709,13 @@ namespace KAPMProjectManagementApi.Migrations
 
                     b.HasKey("Id", "NoSr");
 
-                    b.HasIndex("CodeProject");
+                    b.HasIndex("ProjectDef");
 
-                    b.HasIndex("WBSNo");
+                    b.HasIndex("WBSElement");
 
                     b.HasIndex("WeekNo");
+
+                    b.HasIndex("TrnSapWbsId", "TrnSapWbsWBSElement");
 
                     b.ToTable("trn_project_report_dtl");
                 });
@@ -695,11 +733,6 @@ namespace KAPMProjectManagementApi.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(1)")
                         .HasColumnName("active");
-
-                    b.Property<string>("CodeProject")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("code_project");
 
                     b.Property<DateTime>("DateAdd")
                         .HasColumnType("timestamp with time zone")
@@ -723,6 +756,11 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("varchar(15)")
                         .HasColumnName("nipp");
 
+                    b.Property<string>("ProjectDef")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_def");
+
                     b.Property<string>("RoleId")
                         .IsRequired()
                         .HasColumnType("varchar(50)")
@@ -744,10 +782,10 @@ namespace KAPMProjectManagementApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CodeProject");
-
                     b.HasIndex("Nipp")
                         .IsUnique();
+
+                    b.HasIndex("ProjectDef");
 
                     b.HasIndex("RoleId");
 
@@ -763,19 +801,14 @@ namespace KAPMProjectManagementApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("WBSNo")
+                    b.Property<string>("WBSElement")
                         .HasColumnType("varchar(50)")
-                        .HasColumnName("wbs_no");
+                        .HasColumnName("wbs_element");
 
                     b.Property<string>("Active")
                         .IsRequired()
                         .HasColumnType("varchar(1)")
                         .HasColumnName("active");
-
-                    b.Property<string>("CodeProject")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("code_project");
 
                     b.Property<DateTime>("DateAdd")
                         .HasColumnType("timestamp with time zone")
@@ -785,9 +818,14 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_update");
 
-                    b.Property<DateTime>("FinishDate")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("finish_date");
+                        .HasColumnName("end_date");
+
+                    b.Property<string>("ProjectDef")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_def");
 
                     b.Property<string>("Responsible")
                         .IsRequired()
@@ -813,21 +851,176 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("user_update");
 
-                    b.Property<int>("WBSLevel")
+                    b.Property<string>("WBSDesc")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("wbs_desc");
+
+                    b.Property<string>("WBSLevel")
                         .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasColumnName("wbs_level");
 
-                    b.Property<string>("WBSName")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("wbs_name");
+                    b.HasKey("Id", "WBSElement");
 
-                    b.HasKey("Id", "WBSNo");
-
-                    b.HasIndex("CodeProject");
+                    b.HasIndex("ProjectDef");
 
                     b.ToTable("trn_project_timeline");
+                });
+
+            modelBuilder.Entity("KAPMProjectManagementApi.Models.TrnSapHrd", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ProjectDef")
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_def");
+
+                    b.Property<string>("Active")
+                        .IsRequired()
+                        .HasColumnType("varchar(1)")
+                        .HasColumnName("active");
+
+                    b.Property<DateTime>("DateAdd")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_add");
+
+                    b.Property<DateTime>("DateUpdate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_update");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("end_date");
+
+                    b.Property<DateTime>("FiscalYear")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("fiscal_year");
+
+                    b.Property<string>("ProjectDesc")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_desc");
+
+                    b.Property<string>("ProjectLocation")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_location");
+
+                    b.Property<string>("ProjectOwner")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_owner");
+
+                    b.Property<string>("ProjectProfile")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_profile");
+
+                    b.Property<string>("ProjectResponsible")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_responsible");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("start_date");
+
+                    b.Property<string>("StatusSystem")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("status_system");
+
+                    b.Property<string>("UserAdd")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("user_add");
+
+                    b.Property<string>("UserUpdate")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("user_update");
+
+                    b.HasKey("Id", "ProjectDef");
+
+                    b.ToTable("trn_sap_hrd");
+                });
+
+            modelBuilder.Entity("KAPMProjectManagementApi.Models.TrnSapWbs", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("WBSElement")
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("wbs_element");
+
+                    b.Property<string>("Active")
+                        .IsRequired()
+                        .HasColumnType("varchar(1)")
+                        .HasColumnName("active");
+
+                    b.Property<DateTime>("DateAdd")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_add");
+
+                    b.Property<DateTime>("DateUpdate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_update");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("end_date");
+
+                    b.Property<string>("ProjectType")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("project_type");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("start_date");
+
+                    b.Property<int?>("TrnProjectId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TrnProjectProjectDef")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("UserAdd")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("user_add");
+
+                    b.Property<string>("UserUpdate")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("user_update");
+
+                    b.Property<string>("WBSDesc")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("wbs_desc");
+
+                    b.Property<string>("WBSLevel")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("wbs_level");
+
+                    b.HasKey("Id", "WBSElement");
+
+                    b.HasIndex("TrnProjectId", "TrnProjectProjectDef");
+
+                    b.ToTable("trn_sap_wbs");
                 });
 
             modelBuilder.Entity("KAPMProjectManagementApi.Models.TrnScheduleInvoice", b =>
@@ -847,11 +1040,6 @@ namespace KAPMProjectManagementApi.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(1)")
                         .HasColumnName("active");
-
-                    b.Property<string>("CodeProject")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("code_project");
 
                     b.Property<DateTime>("DateActual")
                         .HasColumnType("timestamp with time zone")
@@ -874,6 +1062,11 @@ namespace KAPMProjectManagementApi.Migrations
                         .HasColumnType("varchar(100)")
                         .HasColumnName("progress_report");
 
+                    b.Property<string>("ProjectDef")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("project_def");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("varchar(20)")
@@ -882,13 +1075,6 @@ namespace KAPMProjectManagementApi.Migrations
                     b.Property<int>("TotalPlan")
                         .HasColumnType("integer")
                         .HasColumnName("total_plan");
-
-                    b.Property<string>("TrnProjectCodeProject")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<int>("TrnProjectId")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -907,24 +1093,24 @@ namespace KAPMProjectManagementApi.Migrations
 
                     b.HasKey("Id", "No");
 
-                    b.HasIndex("TrnProjectId", "TrnProjectCodeProject");
+                    b.HasIndex("ProjectDef");
 
                     b.ToTable("trn_schedule_invoice");
                 });
 
             modelBuilder.Entity("KAPMProjectManagementApi.Models.TrnProject", b =>
                 {
-                    b.HasOne("KAPMProjectManagementApi.Models.MstProjectManager", "MstProjectManager")
-                        .WithOne("TrnProject")
-                        .HasForeignKey("KAPMProjectManagementApi.Models.TrnProject", "PMProject")
-                        .HasPrincipalKey("KAPMProjectManagementApi.Models.MstProjectManager", "Nipp")
+                    b.HasOne("KAPMProjectManagementApi.Models.MstUnitProject", "MstUnitProject")
+                        .WithMany("TrnProjects")
+                        .HasForeignKey("ProjectProfile")
+                        .HasPrincipalKey("UnitProject")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("KAPMProjectManagementApi.Models.MstUnitProject", "MstUnitProject")
-                        .WithMany("TrnProjects")
-                        .HasForeignKey("UnitProject")
-                        .HasPrincipalKey("UnitProject")
+                    b.HasOne("KAPMProjectManagementApi.Models.MstProjectManager", "MstProjectManager")
+                        .WithOne("TrnProject")
+                        .HasForeignKey("KAPMProjectManagementApi.Models.TrnProject", "ProjectResponsible")
+                        .HasPrincipalKey("KAPMProjectManagementApi.Models.MstProjectManager", "Nipp")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -937,17 +1123,21 @@ namespace KAPMProjectManagementApi.Migrations
                 {
                     b.HasOne("KAPMProjectManagementApi.Models.TrnProject", "TrnProject")
                         .WithMany("TrnProjectAdendums")
-                        .HasForeignKey("CodeProject")
-                        .HasPrincipalKey("CodeProject")
+                        .HasForeignKey("ProjectDef")
+                        .HasPrincipalKey("ProjectDef")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("KAPMProjectManagementApi.Models.TrnProjectTimeline", "TrnProjectTimeline")
                         .WithMany("TrnProjectAdendums")
-                        .HasForeignKey("WBSNo")
-                        .HasPrincipalKey("WBSNo")
+                        .HasForeignKey("WBSElement")
+                        .HasPrincipalKey("WBSElement")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("KAPMProjectManagementApi.Models.TrnSapWbs", null)
+                        .WithMany("TrnProjectAdendums")
+                        .HasForeignKey("TrnSapWbsId", "TrnSapWbsWBSElement");
 
                     b.Navigation("TrnProject");
 
@@ -956,17 +1146,17 @@ namespace KAPMProjectManagementApi.Migrations
 
             modelBuilder.Entity("KAPMProjectManagementApi.Models.TrnProjectIssue", b =>
                 {
-                    b.HasOne("KAPMProjectManagementApi.Models.TrnProject", "TrnProject")
-                        .WithMany("TrnProjectIssues")
-                        .HasForeignKey("CodeProject")
-                        .HasPrincipalKey("CodeProject")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("KAPMProjectManagementApi.Models.TrnProjectReportDtl", "TrnProjectReportDtl")
                         .WithMany("TrnProjectIssues")
                         .HasForeignKey("NoSr")
                         .HasPrincipalKey("NoSr")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("KAPMProjectManagementApi.Models.TrnProject", "TrnProject")
+                        .WithMany("TrnProjectIssues")
+                        .HasForeignKey("ProjectDef")
+                        .HasPrincipalKey("ProjectDef")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -988,8 +1178,8 @@ namespace KAPMProjectManagementApi.Migrations
                 {
                     b.HasOne("KAPMProjectManagementApi.Models.TrnProject", "TrnProject")
                         .WithMany("TrnProjectReports")
-                        .HasForeignKey("CodeProject")
-                        .HasPrincipalKey("CodeProject")
+                        .HasForeignKey("ProjectDef")
+                        .HasPrincipalKey("ProjectDef")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1000,15 +1190,15 @@ namespace KAPMProjectManagementApi.Migrations
                 {
                     b.HasOne("KAPMProjectManagementApi.Models.TrnProject", "TrnProject")
                         .WithMany("TrnProjectReportDtls")
-                        .HasForeignKey("CodeProject")
-                        .HasPrincipalKey("CodeProject")
+                        .HasForeignKey("ProjectDef")
+                        .HasPrincipalKey("ProjectDef")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("KAPMProjectManagementApi.Models.TrnProjectTimeline", "TrnProjectTimeline")
                         .WithMany("TrnProjectReportDtls")
-                        .HasForeignKey("WBSNo")
-                        .HasPrincipalKey("WBSNo")
+                        .HasForeignKey("WBSElement")
+                        .HasPrincipalKey("WBSElement")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1019,6 +1209,10 @@ namespace KAPMProjectManagementApi.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("KAPMProjectManagementApi.Models.TrnSapWbs", null)
+                        .WithMany("TrnProjectReportDtls")
+                        .HasForeignKey("TrnSapWbsId", "TrnSapWbsWBSElement");
+
                     b.Navigation("TrnProject");
 
                     b.Navigation("TrnProjectReport");
@@ -1028,17 +1222,17 @@ namespace KAPMProjectManagementApi.Migrations
 
             modelBuilder.Entity("KAPMProjectManagementApi.Models.TrnProjectSO", b =>
                 {
-                    b.HasOne("KAPMProjectManagementApi.Models.TrnProject", "TrnProject")
-                        .WithMany("TrnProjectSOs")
-                        .HasForeignKey("CodeProject")
-                        .HasPrincipalKey("CodeProject")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("KAPMProjectManagementApi.Models.MstEmployee", "MstEmployee")
                         .WithOne("TrnProjectSO")
                         .HasForeignKey("KAPMProjectManagementApi.Models.TrnProjectSO", "Nipp")
                         .HasPrincipalKey("KAPMProjectManagementApi.Models.MstEmployee", "Nipp")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("KAPMProjectManagementApi.Models.TrnProject", "TrnProject")
+                        .WithMany("TrnProjectSOs")
+                        .HasForeignKey("ProjectDef")
+                        .HasPrincipalKey("ProjectDef")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1060,10 +1254,19 @@ namespace KAPMProjectManagementApi.Migrations
                 {
                     b.HasOne("KAPMProjectManagementApi.Models.TrnProject", "TrnProject")
                         .WithMany("TrnProjectTimelines")
-                        .HasForeignKey("CodeProject")
-                        .HasPrincipalKey("CodeProject")
+                        .HasForeignKey("ProjectDef")
+                        .HasPrincipalKey("ProjectDef")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("TrnProject");
+                });
+
+            modelBuilder.Entity("KAPMProjectManagementApi.Models.TrnSapWbs", b =>
+                {
+                    b.HasOne("KAPMProjectManagementApi.Models.TrnProject", "TrnProject")
+                        .WithMany()
+                        .HasForeignKey("TrnProjectId", "TrnProjectProjectDef");
 
                     b.Navigation("TrnProject");
                 });
@@ -1072,8 +1275,9 @@ namespace KAPMProjectManagementApi.Migrations
                 {
                     b.HasOne("KAPMProjectManagementApi.Models.TrnProject", "TrnProject")
                         .WithMany("TrnScheduleInvoice")
-                        .HasForeignKey("TrnProjectId", "TrnProjectCodeProject")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("ProjectDef")
+                        .HasPrincipalKey("ProjectDef")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("TrnProject");
@@ -1131,6 +1335,13 @@ namespace KAPMProjectManagementApi.Migrations
                 });
 
             modelBuilder.Entity("KAPMProjectManagementApi.Models.TrnProjectTimeline", b =>
+                {
+                    b.Navigation("TrnProjectAdendums");
+
+                    b.Navigation("TrnProjectReportDtls");
+                });
+
+            modelBuilder.Entity("KAPMProjectManagementApi.Models.TrnSapWbs", b =>
                 {
                     b.Navigation("TrnProjectAdendums");
 

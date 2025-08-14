@@ -12,8 +12,8 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectIssue
         [JsonProperty("no_issue")]
         public string NoIssue { get; set; } = default!;
 
-        [JsonProperty("code_project")]
-        public string CodeProject { get; set; } = default!;
+        [JsonProperty("project_def")]
+        public string ProjectDef { get; set; } = default!;
 
         [JsonProperty("week_no")]
         public string WeekNo { get; set; } = default!;
@@ -21,8 +21,8 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectIssue
         [JsonProperty("no_sr")]
         public string NoSr { get; set; } = default!;
 
-        [JsonProperty("wbs_no")]
-        public string WBSNo { get; set; } = default!;
+        [JsonProperty("wbs_element")]
+        public string WBSElement { get; set; } = default!;
 
         [JsonProperty("problem")]
         public string Problem { get; set; } = string.Empty;

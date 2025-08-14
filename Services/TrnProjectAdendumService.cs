@@ -25,11 +25,11 @@ namespace KAPMProjectManagementApi.Services
             var exist = await _repository.ExistsAsync(reuqest.AdendumNo);
             if (exist) throw new BadRequestException($"Data with Adendum No {reuqest.AdendumNo} already exist.");
 
-            var project = await _projectRepository.ExistsAsync(reuqest.CodeProject);
-            if (!project) throw new KeyNotFoundException($"Data with Code Project {reuqest.CodeProject} not found");
+            var project = await _projectRepository.ExistsAsync(reuqest.ProjectDef);
+            if (!project) throw new KeyNotFoundException($"Data with Code Project {reuqest.ProjectDef} not found");
 
-            var timeline = await _ProjectTimelineRepository.ExistsAsync(reuqest.WBSNo);
-            if (!timeline) throw new KeyNotFoundException($"Data with No WBS {reuqest.WBSNo} not found.");
+            var timeline = await _ProjectTimelineRepository.ExistsAsync(reuqest.WBSElement);
+            if (!timeline) throw new KeyNotFoundException($"Data with No WBS {reuqest.WBSElement} not found.");
 
             var mapper = ProjectAdendumMapper.ToProjectAdendumFromRequest(reuqest);
             var create = await _repository.CreateAsync(mapper);
@@ -54,11 +54,11 @@ namespace KAPMProjectManagementApi.Services
             var exist = await _repository.ExistsAsync(reuqest.AdendumNo);
             if (!exist) throw new KeyNotFoundException($"Data with Adendum No {reuqest.AdendumNo} not found.");
 
-            var project = await _projectRepository.ExistsAsync(reuqest.CodeProject);
-            if (!project) throw new KeyNotFoundException($"Data with Code Project {reuqest.CodeProject} not found");
+            var project = await _projectRepository.ExistsAsync(reuqest.ProjectDef);
+            if (!project) throw new KeyNotFoundException($"Data with Code Project {reuqest.ProjectDef} not found");
 
-            var timeline = await _ProjectTimelineRepository.ExistsAsync(reuqest.WBSNo);
-            if (!timeline) throw new KeyNotFoundException($"Data with No WBS {reuqest.WBSNo} not found.");
+            var timeline = await _ProjectTimelineRepository.ExistsAsync(reuqest.WBSElement);
+            if (!timeline) throw new KeyNotFoundException($"Data with No WBS {reuqest.WBSElement} not found.");
 
             var mapper = ProjectAdendumMapper.ToProjectAdendumFromRequest(reuqest);
             var update = await _repository.UpdateAsync(mapper);

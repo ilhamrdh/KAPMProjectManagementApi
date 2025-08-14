@@ -7,12 +7,12 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectTimeline
     public class ProjectTimelineResponse
     {
         public int Id { get; set; }
-        [JsonProperty("wbs_no")]
-        public string WBSNo { get; set; } = default!;
+        [JsonProperty("wbs_element")]
+        public string WBSElement { get; set; } = default!;
         [JsonProperty("wbs_level")]
         public int WBSLevel { get; set; } = default!;
-        [JsonProperty("wbs_name")]
-        public string WBSName { get; set; } = string.Empty;
+        [JsonProperty("wbs_desc")]
+        public string WBSDesc { get; set; } = string.Empty;
         [JsonProperty("responsible")]
         public string Responsible { get; set; } = string.Empty;
         [JsonProperty("status")]
@@ -22,8 +22,8 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectTimeline
         public string Active { get; set; } = "Y";
         [JsonProperty("start_date")]
         public DateTime StartDate { get; set; }
-        [JsonProperty("finish_date")]
-        public DateTime FinishDate { get; set; }
+        [JsonProperty("end_date")]
+        public DateTime EndDate { get; set; }
         [JsonProperty("project")]
         public ProjectResponse? TrnProject { get; set; }
 
@@ -33,11 +33,14 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectTimeline
 
     public class ProjectTimelineSimpleResponse
     {
-        [JsonProperty("wbs_no")]
-        public string WBSNo { get; set; } = default!;
+        public int Id { get; set; }
+        [JsonProperty("wbs_element")]
+        public string WBSElement { get; set; } = default!;
         [JsonProperty("wbs_level")]
         public int WBSLevel { get; set; } = default!;
-        [JsonProperty("wbs_name")]
-        public string WBSName { get; set; } = string.Empty;
+        [JsonProperty("wbs_desc")]
+        public string WBSDesc { get; set; } = string.Empty;
+        [JsonProperty("responsible")]
+        public string Responsible { get; set; } = string.Empty;
     }
 }

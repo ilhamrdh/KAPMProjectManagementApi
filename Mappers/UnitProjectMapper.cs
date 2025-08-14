@@ -23,8 +23,8 @@ namespace KAPMProjectManagementApi.Mappers
                 Active = model.Active,
                 Projects = model.TrnProjects.Select(p => new ProjectSimpleResponse
                 {
-                    CodeProject = p.CodeProject,
-                    DescProject = p.DescProject,
+                    ProjectDef = p.ProjectDef,
+                    ProjectDesc = p.ProjectDesc,
                 }).ToList()
             };
         }

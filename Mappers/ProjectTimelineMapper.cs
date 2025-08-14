@@ -9,14 +9,14 @@ namespace KAPMProjectManagementApi.Mappers
         {
             return new ProjectTimelineResponse
             {
-                WBSNo = model.WBSNo,
-                WBSName = model.WBSName,
+                WBSElement = model.WBSElement,
+                WBSDesc = model.WBSDesc,
                 WBSLevel = model.WBSLevel,
                 Responsible = model.Responsible,
                 Active = model.Active,
                 Status = model.Status.ToString(),
                 StartDate = model.StartDate,
-                FinishDate = model.FinishDate,
+                EndDate = model.EndDate,
                 TrnProject = model.TrnProject?.ToProjectResponses(),
 
             };
@@ -26,9 +26,11 @@ namespace KAPMProjectManagementApi.Mappers
         {
             return new ProjectTimelineSimpleResponse
             {
-                WBSNo = model.WBSNo,
-                WBSName = model.WBSName,
+                WBSElement = model.WBSElement,
+                WBSDesc = model.WBSDesc,
                 WBSLevel = model.WBSLevel,
+                Id = model.Id,
+                Responsible = model.Responsible,
             };
         }
 
@@ -36,12 +38,12 @@ namespace KAPMProjectManagementApi.Mappers
         {
             return new TrnProjectTimeline
             {
-                WBSNo = request.WBSNo,
-                WBSName = request.WBSName,
+                WBSElement = request.WBSElement,
+                WBSDesc = request.WBSDesc,
                 WBSLevel = request.WBSLevel,
                 StartDate = request.StartDate,
-                FinishDate = request.FinishDate,
-                CodeProject = request.CodeProject,
+                EndDate = request.EndDate,
+                ProjectDef = request.ProjectDef,
                 Responsible = request.Responsible,
                 Status = request.Status,
                 Active = request.Active,

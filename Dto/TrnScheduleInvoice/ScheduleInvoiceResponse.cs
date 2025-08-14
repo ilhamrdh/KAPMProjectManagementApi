@@ -10,8 +10,8 @@ namespace KAPMProjectManagementApi.Dto.TrnScheduleInvoice
         [JsonProperty("no")]
         public string No { get; set; } = default!;
 
-        [JsonProperty("code_project")]
-        public string CodeProject { get; set; } = default!;
+        [JsonProperty("project_def")]
+        public string ProjectDef { get; set; } = default!;
 
         [JsonProperty("type")]
         public ETypeInvoice Type { get; set; }

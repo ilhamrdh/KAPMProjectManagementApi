@@ -39,8 +39,8 @@ namespace KAPMProjectManagementApi.Mappers
                 ActualDate = model.ActualDate,
                 PlanDate = model.PlanDate,
                 Status = model.Status,
-                CodeProject = model.CodeProject,
-                WBSNo = model.WBSNo,
+                ProjectDef = model.ProjectDef,
+                WBSElement = model.WBSElement,
                 WeekNo = model.WeekNo,
             };
         }

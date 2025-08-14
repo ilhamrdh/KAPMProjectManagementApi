@@ -54,8 +54,8 @@ namespace KAPMProjectManagementApi.Repositories
             exist.ActualDate = model.ActualDate;
             exist.PlanDate = model.PlanDate;
             exist.Status = model.Status;
-            exist.CodeProject = model.CodeProject;
-            exist.WBSNo = model.WBSNo;
+            exist.ProjectDef = model.ProjectDef;
+            exist.WBSElement = model.WBSElement;
             exist.WeekNo = model.WeekNo;
             exist.UserUpdate = model.UserUpdate;
             exist.DateUpdate = DateTime.UtcNow;

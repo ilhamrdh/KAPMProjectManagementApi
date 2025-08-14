@@ -11,10 +11,10 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectAdendum
         [JsonProperty("adendum_no")]
         public string AdendumNo { get; set; } = default!;
 
-        [Required(ErrorMessage = "Code Project is required")]
-        [StringLength(50, ErrorMessage = "Code Project must be at most 50 characters long")]
+        [Required(ErrorMessage = "Project Def is required")]
+        [StringLength(50, ErrorMessage = "Project Def must be at most 50 characters long")]
         [JsonProperty("code_project")]
-        public string CodeProject { get; set; } = default!;
+        public string ProjectDef { get; set; } = default!;
 
         [Required(ErrorMessage = "Type Adendum is required")]
         [StringLength(50, ErrorMessage = "Type Adendum must be at most 50 characters long")]
@@ -23,8 +23,8 @@ namespace KAPMProjectManagementApi.Dto.TrnProjectAdendum
 
         [Required(ErrorMessage = "WBS No is required")]
         [StringLength(50, ErrorMessage = "WBS No must be at most 50 characters long")]
-        [JsonProperty("wbs_no")]
-        public string WBSNo { get; set; } = default!;
+        [JsonProperty("wbs_element")]
+        public string WBSElement { get; set; } = default!;
 
         [Required(ErrorMessage = "Cost Before is required")]
         [Range(0, double.MaxValue, ErrorMessage = "Cost Before must be a positive number")]

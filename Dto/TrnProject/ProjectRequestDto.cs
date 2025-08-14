@@ -6,15 +6,10 @@ namespace KAPMProjectManagementApi.Dto.TrnProject
 {
     public class ProjectRequestDto
     {
-        [Required(ErrorMessage = "Code Project is required")]
-        [StringLength(50, ErrorMessage = "Code Project cannot exceed 50 characters")]
-        [JsonProperty("code_project")]
-        public string CodeProject { get; set; } = default!;
-
-        [Required(ErrorMessage = "Desc Project is required")]
-        [StringLength(50, ErrorMessage = "Desc Project cannot exceed 50 characters")]
-        [JsonProperty("desc_project")]
-        public string DescProject { get; set; } = default!;
+        [Required(ErrorMessage = "Project Definition is required")]
+        [StringLength(50, ErrorMessage = "Project Definition cannot exceed 50 characters")]
+        [JsonProperty("project_def")]
+        public string ProjectDef { get; set; } = string.Empty;
 
         [StringLength(50, ErrorMessage = "No SPMK cannot exceed 50 characters")]
         [JsonProperty("no_spmk")]
@@ -72,15 +67,6 @@ namespace KAPMProjectManagementApi.Dto.TrnProject
         [JsonProperty("start_date_spmk")]
         public DateTime StartDateSPMK { get; set; }
 
-        [Required(ErrorMessage = "Start Date is required")]
-        [DataType(DataType.DateTime)]
-        [JsonProperty("start_date")]
-        public DateTime StartDate { get; set; }
-
-        [DataType(DataType.DateTime)]
-        [JsonProperty("finish_date")]
-        public DateTime FinishDate { get; set; }
-
         [Range(0, 100, ErrorMessage = "Plan Percentage must be between 0 and 100")]
         [JsonProperty("plan_persentage")]
         public double PlanPersentage { get; set; }
@@ -102,9 +88,5 @@ namespace KAPMProjectManagementApi.Dto.TrnProject
         [RegularExpression("^[YN]$", ErrorMessage = "Active must be Y or N")]
         [JsonProperty("active")]
         public string Active { get; set; } = "Y";
-
-        [StringLength(50, ErrorMessage = "User Add cannot exceed 50 characters")]
-        [JsonProperty("user_add")]
-        public string UserAdd { get; set; } = string.Empty;
     }
 }

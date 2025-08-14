@@ -11,10 +11,10 @@ namespace KAPMProjectManagementApi.Dto.TrnScheduleInvoice
         [StringLength(50, ErrorMessage = "No must be at most 50 characters")]
         public string No { get; set; } = default!;
 
-        [JsonProperty("code_project")]
-        [Required(ErrorMessage = "Code Project is required")]
-        [StringLength(50, ErrorMessage = "Code Project must be at most 50 characters")]
-        public string CodeProject { get; set; } = default!;
+        [JsonProperty("project_def")]
+        [Required(ErrorMessage = "Project Def is required")]
+        [StringLength(50, ErrorMessage = "Project Def must be at most 50 characters")]
+        public string ProjectDef { get; set; } = default!;
 
         [JsonProperty("type")]
         [EnumDataType(typeof(ETypeInvoice), ErrorMessage = "Status must be one of: DP, Termin, ZeroToHundred, Monthly")]

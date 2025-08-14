@@ -21,8 +21,8 @@ namespace KAPMProjectManagementApi.Services
             var exist = await _repository.ExistsAsync(reuqest.No);
             if (exist) throw new BadRequestException($"Data with No {reuqest.No} already exist.");
 
-            var project = await _projectRepository.ExistsAsync(reuqest.CodeProject);
-            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.CodeProject} not found.");
+            var project = await _projectRepository.ExistsAsync(reuqest.ProjectDef);
+            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.ProjectDef} not found.");
 
             var mapper = ScheduleInvoiceMapper.ToScheduleInvoiceFromRequest(reuqest);
             var create = await _repository.CreateAsync(mapper);
@@ -47,8 +47,8 @@ namespace KAPMProjectManagementApi.Services
             var exist = await _repository.ExistsAsync(reuqest.No);
             if (!exist) throw new KeyNotFoundException($"Data with No {reuqest.No} not found.");
 
-            var project = await _projectRepository.ExistsAsync(reuqest.CodeProject);
-            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.CodeProject} not found.");
+            var project = await _projectRepository.ExistsAsync(reuqest.ProjectDef);
+            if (!project) throw new KeyNotFoundException($"Data with Project Code {reuqest.ProjectDef} not found.");
 
             var mapper = ScheduleInvoiceMapper.ToScheduleInvoiceFromRequest(reuqest);
             var update = await _repository.UpdateAsync(mapper);
