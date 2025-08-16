@@ -1,4 +1,5 @@
 using KAPMProjectManagementApi.Dto.TrnProject;
+using KAPMProjectManagementApi.Dto.Web;
 using KAPMProjectManagementApi.Exceptions;
 using KAPMProjectManagementApi.Interfaces.MasterProjectManager;
 using KAPMProjectManagementApi.Interfaces.MasterUnitProject;
@@ -37,9 +38,9 @@ namespace KAPMProjectManagementApi.Services
             return createP.ToProjectResponses();
         }
 
-        public async Task<IEnumerable<ProjectResponse>> GetAllProjectAsync()
+        public async Task<IEnumerable<ProjectResponse>> GetAllProjectAsync(QuerySearch qs)
         {
-            var p = await _repository.GetAllAsync();
+            var p = await _repository.GetAllAsync(qs);
             return p.Select(p => p.ToProjectResponses()).ToList();
         }
 

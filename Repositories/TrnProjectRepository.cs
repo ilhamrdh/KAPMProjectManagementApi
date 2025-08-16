@@ -27,7 +27,14 @@ namespace KAPMProjectManagementApi.Repositories
 
         public async Task<IEnumerable<TrnProject>> GetAllAsync(QuerySearch qs)
         {
-            return await _context.TrnProject.AsNoTracking().Include(x => x.MstUnitProject).Include(x => x.MstProjectManager).ToListAsync();
+            var projects = _context.TrnProject.AsNoTracking().Include(x => x.MstUnitProject).Include(x => x.MstProjectManager).AsQueryable();
+            if (!string.IsNullOrEmpty(qs.Keyword))
+            {
+                projects = projects.Where(x => x.ProjectDef.Contains(qs.Keyword));
+            }
+            var skip = (qs.PageNumber - 1) * qs.PageSize;
+
+            return await projects.Skip(skip).Take(qs.PageSize).ToListAsync();
         }
 
         public async Task<TrnProject?> GetByProjectDefAsync(string projectDef)

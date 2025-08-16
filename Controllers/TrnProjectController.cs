@@ -30,9 +30,9 @@ namespace KAPMProjectManagementApi.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] QuerySearch qs)
         {
-            var result = await _service.GetAllProjectAsync();
+            var result = await _service.GetAllProjectAsync(qs);
             WebResponse<IEnumerable<ProjectResponse>> response = new WebResponse<IEnumerable<ProjectResponse>>
             {
                 StatusCode = 200,
