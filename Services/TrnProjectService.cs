@@ -44,11 +44,11 @@ namespace KAPMProjectManagementApi.Services
             return p.Select(p => p.ToProjectResponses()).ToList();
         }
 
-        public async Task<ProjectResponse?> GetProjectByProjectDefAsync(string projectDef)
+        public async Task<ProjectDetailResponse?> GetProjectByProjectDefAsync(string projectDef)
         {
             var p = await _repository.GetByProjectDefAsync(projectDef);
             if (p == null) throw new KeyNotFoundException($"Data with Code Project {projectDef} not found.");
-            return p.ToProjectResponses();
+            return p.ToProjectDetailResponse();
         }
 
         public async Task<ProjectResponse> UpdateProjectAsync(ProjectRequestDto request)

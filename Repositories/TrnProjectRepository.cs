@@ -39,7 +39,11 @@ namespace KAPMProjectManagementApi.Repositories
 
         public async Task<TrnProject?> GetByProjectDefAsync(string projectDef)
         {
-            var p = await _context.TrnProject.FirstOrDefaultAsync(x => x.ProjectDef == projectDef);
+            var p = await _context.TrnProject.AsNoTracking()
+            .Include(x => x.MstUnitProject)
+            .Include(x => x.MstProjectManager)
+            .Include(x => x.TrnProjectTimelines)
+            .FirstOrDefaultAsync(x => x.ProjectDef == projectDef);
             if (p == null) return null;
             return p;
         }

@@ -1,4 +1,5 @@
 using KAPMProjectManagementApi.Dto.TrnProject;
+using KAPMProjectManagementApi.Dto.TrnProjectTimeline;
 using KAPMProjectManagementApi.Models;
 
 namespace KAPMProjectManagementApi.Mappers
@@ -33,7 +34,48 @@ namespace KAPMProjectManagementApi.Mappers
                 ProgressReport = model.ProgressReport,
                 Status = model.Status.ToString(),
                 MstUnitProject = model.MstUnitProject.ToUnitProjectSimpleResponse(),
-                MstProjectManager = model.MstProjectManager.ToProjectManagerResponses()
+                MstProjectManager = model.MstProjectManager.ToProjectManagerResponses(),
+
+            };
+        }
+        public static ProjectDetailResponse ToProjectDetailResponse(this TrnProject model)
+        {
+            return new ProjectDetailResponse
+            {
+                ProjectDef = model.ProjectDef,
+                ProjectDesc = model.ProjectDesc,
+                NoSPMK = model.NoSPMK,
+                NoContract = model.NoContract,
+                CompanyCode = model.CompanyCode,
+                FiscalYear = model.FiscalYear,
+                ProjectLocation = model.ProjectLocation,
+                PaymentMethod = model.PaymentMethod,
+                ContractValue = model.ContractValue,
+                Bank = model.Bank,
+                ProjectOwner = model.ProjectOwner,
+                AccountNumber = model.AccountNumber,
+                AccountName = model.AccountName,
+                Active = model.Active,
+                WorkingMethod = model.WorkingMethod,
+                PPH = model.PPH,
+                StartDateSPMK = model.StartDateSPMK,
+                StartDate = model.StartDate,
+                EndDate = model.EndDate,
+                PlanPersentage = model.PlanPersentage,
+                ActualPersentage = model.ActualPersentage,
+                ProgressReport = model.ProgressReport,
+                Status = model.Status.ToString(),
+                MstUnitProject = model.MstUnitProject.ToUnitProjectSimpleResponse(),
+                MstProjectManager = model.MstProjectManager.ToProjectManagerResponses(),
+                ProjectTimelines = model.TrnProjectTimelines.Select(p => new ProjectTimelineSimpleResponse
+                {
+                    Id = p.Id,
+                    WBSElement = p.WBSElement,
+                    WBSDesc = p.WBSDesc,
+                    WBSLevel = p.WBSLevel,
+                    Responsible = p.Responsible,
+
+                }).ToList(),
             };
         }
 
